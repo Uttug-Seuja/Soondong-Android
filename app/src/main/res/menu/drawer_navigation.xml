@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id = "@+id/mainPageDrawer"
+        android:title = "Main Page"
+        />
+    <item
+        android:id = "@+id/allPollsDrawer"
+        android:title = "All Polls"
+
+
+        />
+    <item
+        android:id = "@+id/hotPollsDrawer"
+        android:title = "Hot Polls"
+        />
+
+    <item
+        android:id = "@+id/searchDrawer"
+        android:title = "Search"
+        />
+
+    <item
+        android:id = "@+id/myPageDrawer"
+        android:title = "My Page"
+        />
+
+
+    <item
+        android:id = "@+id/newPollDrawer"
+        android:title = "New Poll"
+        />
+
+    <item
+        android:id = "@+id/logoutDrawer"
+        android:title = "Logout"
+        />
+</menu>
