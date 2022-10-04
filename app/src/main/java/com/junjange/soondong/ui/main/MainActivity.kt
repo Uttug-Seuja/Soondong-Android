@@ -7,12 +7,12 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import com.junjange.soondong.R
 import com.junjange.soondong.databinding.ActivityMainBinding
 import com.junjange.soondong.ui.matching.MatchingActivity
 import com.junjange.soondong.ui.matching_detail.MatchingDetailActivity
+import com.junjange.soondong.ui.matching_edit.MatchingEditActivity
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -39,6 +39,13 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         }
         binding.newPollBtn.setOnClickListener {
             startActivity( Intent(this@MainActivity, MatchingDetailActivity::class.java))
+
+        }
+
+
+
+        binding.searchBtn.setOnClickListener {
+            startActivity( Intent(this@MainActivity, MatchingEditActivity::class.java))
 
         }
     }
