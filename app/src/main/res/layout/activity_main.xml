@@ -233,7 +233,7 @@
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/all_polls_btn"
+                android:id="@+id/today_match_btn"
                 android:layout_width="310dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -275,7 +275,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/new_poll_btn"
+                android:id="@+id/new_match_btn"
                 android:layout_width="310dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"

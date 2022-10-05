@@ -2,15 +2,10 @@ package com.junjange.soondong.ui.matching_detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.core.view.GravityCompat
-import com.google.android.material.navigation.NavigationView
 import com.junjange.soondong.R
-import com.junjange.soondong.databinding.ActivityMainBinding
 import com.junjange.soondong.databinding.ActivityMatchingDetailBinding
-import com.junjange.soondong.ui.main.MainViewModel
 
 class MatchingDetailActivity : AppCompatActivity()  {
     private val binding by lazy { ActivityMatchingDetailBinding.inflate(layoutInflater) }

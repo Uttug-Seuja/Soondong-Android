@@ -10,9 +10,10 @@ import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.junjange.soondong.R
 import com.junjange.soondong.databinding.ActivityMainBinding
-import com.junjange.soondong.ui.matching.MatchingActivity
+import com.junjange.soondong.ui.dialog.EditDialog
 import com.junjange.soondong.ui.matching_detail.MatchingDetailActivity
 import com.junjange.soondong.ui.matching_edit.MatchingEditActivity
+import com.junjange.soondong.utils.MyApplication
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -34,18 +35,38 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
         binding.mainNavigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
-        binding.allPollsBtn.setOnClickListener {
-            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
-        }
-        binding.newPollBtn.setOnClickListener {
+
+        binding.todayMatchBtn.setOnClickListener {
             startActivity( Intent(this@MainActivity, MatchingDetailActivity::class.java))
 
         }
 
 
 
-        binding.searchBtn.setOnClickListener {
-            startActivity( Intent(this@MainActivity, MatchingEditActivity::class.java))
+        binding.newMatchBtn.setOnClickListener {
+
+            val title = MyApplication.prefs.getString("title", "")
+            val sports = MyApplication.prefs.getString("sports", "종목 선택")
+            val place = MyApplication.prefs.getString("place", "")
+            val recruit = MyApplication.prefs.getString("recruit", "")
+            val gender = MyApplication.prefs.getString("gender", "모집 성별")
+            val matchingDate = MyApplication.prefs.getString("matchingDate", "매칭 날짜")
+            val matchingStartTime = MyApplication.prefs.getString("matchingStartTime", "매칭 시작시간")
+            val matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "매칭 종료시간")
+            val content = MyApplication.prefs.getString("content", "")
+
+
+
+            if (title != "" || sports != "종목 선택" || place != "" || recruit != "" ||  gender != "모집 성별" ||
+                matchingDate != "매칭 날짜" || matchingStartTime != "매칭 시작시간" || matchingEndTime != "매칭 종료시간" || content != ""){
+
+                startActivity(Intent(this, EditDialog::class.java))
+
+
+            }else{
+                startActivity(Intent(this, MatchingEditActivity::class.java))
+
+            }
 
         }
     }

@@ -1,4 +1,6 @@
 package com.junjange.soondong.ui.matching
 
-class MatchingViewModel {
+import androidx.lifecycle.ViewModel
+
+class MatchingViewModel : ViewModel() {
 }
