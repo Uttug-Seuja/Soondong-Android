@@ -11,8 +11,11 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -22,6 +25,7 @@ import com.junjange.soondong.R
 import com.junjange.soondong.adapter.CalendarAdapter
 import com.junjange.soondong.data.CalendarDateModel
 import com.junjange.soondong.databinding.ActivityMatchingEditBinding
+import com.junjange.soondong.ui.main.MainActivity
 import com.junjange.soondong.utils.HorizontalItemDecoration
 import com.junjange.soondong.utils.MyApplication
 import java.text.SimpleDateFormat
@@ -66,6 +70,9 @@ class MatchingEditActivity : AppCompatActivity(){
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        setSupportActionBar(binding.mainToolbar) // 툴바를 액티비티의 앱바로 지정
+        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+
 
         title = MyApplication.prefs.getString("title", "")
         sports = MyApplication.prefs.getString("sports", "종목 선택")
@@ -95,6 +102,27 @@ class MatchingEditActivity : AppCompatActivity(){
 
 
 
+    }
+
+    //액션버튼 메뉴 액션바에 집어 넣기
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    //액션버튼 클릭 했을 때
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item?.itemId){
+
+
+            R.id.action_search -> {
+                startActivity(Intent(this, MainActivity::class.java))
+
+                return super.onOptionsItemSelected(item)
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     private fun addTextChangedListener(){
@@ -151,6 +179,9 @@ class MatchingEditActivity : AppCompatActivity(){
 
     }
 
+
+
+
     private fun setOnClickListener(){
 
 
@@ -168,6 +199,7 @@ class MatchingEditActivity : AppCompatActivity(){
             val datePicker = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
                     historyDate =
                         year.toString() + "-"
                     //DatePicker 특성 상 한 자리 날짜 입력에 대한 대응을 해줘야 함
@@ -224,6 +256,7 @@ class MatchingEditActivity : AppCompatActivity(){
 
         // 히스토리 종료 시간 입력
         binding.editHistoryEndTime.setOnClickListener {
+
             val timePicker = TimePickerDialog(
                 this, R.style.DatePicker,
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
@@ -242,6 +275,7 @@ class MatchingEditActivity : AppCompatActivity(){
             )
             timePicker.show()
 
+
             val view: ViewGroup.MarginLayoutParams =
                 timePicker.getButton(Dialog.BUTTON_POSITIVE).layoutParams as ViewGroup.MarginLayoutParams
             view.leftMargin = 16
@@ -258,31 +292,31 @@ class MatchingEditActivity : AppCompatActivity(){
 
 
         // 작성 완료 및 업로드 버튼 눌렀을 때 진입
-        binding.buttonUploadHistory.setOnClickListener {
-            if (binding.editHistoryTitle.text.isEmpty() || binding.editHistoryPlace.text.isEmpty() || historyDate == null || historyTime == null) {
-                if (binding.editHistoryTitle.text.isEmpty()) binding.editHistoryTitle.error = "제목은 필수입력 항목입니다."
-                if (binding.editHistoryPlace.text.isEmpty()) binding.editHistoryPlace.error = "장소명은 필수입력 항목입니다."
-                if (historyDate == null) {
-                    Toast.makeText(this, "날짜를 입력해주세요", Toast.LENGTH_LONG).show()
-                }
-                if (historyTime == null) {
-                    Toast.makeText(this, "시간을 입력해주세요", Toast.LENGTH_LONG).show()
-                }
-            } else {
-                historyTitle = binding.editHistoryTitle.text.toString()
-                historyComment = binding.editHistoryContent.text.toString()
-                historyPlaceTitle = binding.editHistoryPlace.text.toString()
-                historyCreatedAt = historyDate + historyTime
-
-                // 날짜 및 시각은 LocalDateTime 객체 형태로 Request 해야함
-                val localTime = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    LocalDateTime.parse(historyCreatedAt)
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }
-
-            }
-        }
+//        binding.buttonUploadHistory.setOnClickListener {
+//            if (binding.editHistoryTitle.text.isEmpty() || binding.editHistoryPlace.text.isEmpty() || historyDate == null || historyTime == null) {
+//                if (binding.editHistoryTitle.text.isEmpty()) binding.editHistoryTitle.error = "제목은 필수입력 항목입니다."
+//                if (binding.editHistoryPlace.text.isEmpty()) binding.editHistoryPlace.error = "장소명은 필수입력 항목입니다."
+//                if (historyDate == null) {
+//                    Toast.makeText(this, "날짜를 입력해주세요", Toast.LENGTH_LONG).show()
+//                }
+//                if (historyTime == null) {
+//                    Toast.makeText(this, "시간을 입력해주세요", Toast.LENGTH_LONG).show()
+//                }
+//            } else {
+//                historyTitle = binding.editHistoryTitle.text.toString()
+//                historyComment = binding.editHistoryContent.text.toString()
+//                historyPlaceTitle = binding.editHistoryPlace.text.toString()
+//                historyCreatedAt = historyDate + historyTime
+//
+//                // 날짜 및 시각은 LocalDateTime 객체 형태로 Request 해야함
+//                val localTime = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    LocalDateTime.parse(historyCreatedAt)
+//                } else {
+//                    TODO("VERSION.SDK_INT < O")
+//                }
+//
+//            }
+//        }
 
     }
 }

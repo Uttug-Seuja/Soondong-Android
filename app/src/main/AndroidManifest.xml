@@ -34,14 +34,9 @@
             android:theme="@style/Theme.Soondong.NoActionBar" />
         <activity
             android:name=".ui.matching_edit.MatchingEditActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".ui.matching_detail.MatchingDetailActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
-        <activity
-            android:name=".ui.matching.MatchingEditActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
