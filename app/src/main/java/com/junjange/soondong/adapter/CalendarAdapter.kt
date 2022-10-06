@@ -1,5 +1,6 @@
 package com.junjange.soondong.adapter
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,29 +11,48 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.junjange.soondong.R
 import com.junjange.soondong.data.CalendarDateModel
+import com.junjange.soondong.databinding.ItemRecyclerMatchBinding
+import com.junjange.soondong.databinding.RowCalendarDateBinding
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CalendarAdapter(private val listener: (calendarDateModel: CalendarDateModel, position: Int) -> Unit) :
-    RecyclerView.Adapter<CalendarAdapter.MyViewHolder>() {
-    private val list = ArrayList<CalendarDateModel>()
+class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
+    private val items = ArrayList<CalendarDateModel>()
     private val cal = Calendar.getInstance(Locale.KOREA)
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-//        init {
-//            val monthCalendar = cal.clone() as Calendar
-//
-//            bind(CalendarDateModel(monthCalendar.time, true))
-//
-//            Log.d("ttt",monthCalendar.time.toString() )
-//        }
+    interface ItemClickListener {
+        fun onItemClickListener(
+            item: CalendarDateModel,
+            position: Int,
+        )
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = RowCalendarDateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+
+        holder.bind(items[position])
+    }
+
+
+
+    inner class ViewHolder(private val binding: RowCalendarDateBinding) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(calendarDateModel: CalendarDateModel) {
 
-            val calendarDay = itemView.findViewById<TextView>(R.id.tv_calendar_day)
-            val calendarDate = itemView.findViewById<TextView>(R.id.tv_calendar_date)
-            val cardView = itemView.findViewById<CardView>(R.id.card_calendar)
+            val calendarDay = binding.tvCalendarDay
+            val calendarDate = binding.tvCalendarDate
+            val cardView = binding.cardCalendar
 
 
             if (calendarDateModel.isSelected) {
@@ -78,34 +98,31 @@ class CalendarAdapter(private val listener: (calendarDateModel: CalendarDateMode
             calendarDay.text = calendarDateModel.calendarDay
             calendarDate.text = calendarDateModel.calendarDate
             cardView.setOnClickListener {
-                listener.invoke(calendarDateModel, adapterPosition)
+                onClickListener.onItemClickListener(calendarDateModel, adapterPosition)
             }
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.row_calendar_date, parent, false)
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
+    fun setItem(item: CalendarDateModel){
 
-        return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-
-
-        holder.bind(list[position])
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
+
 
     override fun getItemCount(): Int {
-        return list.size
+        return items.size
     }
 
     fun setData(calendarList: ArrayList<CalendarDateModel>) {
 
-        list.clear()
-        list.addAll(calendarList)
+        items.clear()
+        items.addAll(calendarList)
         notifyDataSetChanged()
     }
 }

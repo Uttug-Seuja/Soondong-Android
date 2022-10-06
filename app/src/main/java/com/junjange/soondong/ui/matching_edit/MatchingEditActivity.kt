@@ -223,7 +223,7 @@ class MatchingEditActivity : AppCompatActivity(){
         // 히스토리 시작 시간 입력
         binding.editHistoryStartTime.setOnClickListener {
             val timePicker = TimePickerDialog(
-                this, R.style.DatePicker1,
+                this, R.style.TimePicker,
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                     //TimePicker 특성 상 한자리 시간 입력에 대한 대응을 해줘야 함
                     historyTime =
@@ -238,6 +238,7 @@ class MatchingEditActivity : AppCompatActivity(){
 
                 }, hour, minute, false
             )
+
 
             timePicker.show()
 
@@ -259,7 +260,7 @@ class MatchingEditActivity : AppCompatActivity(){
         binding.editHistoryEndTime.setOnClickListener {
 
             val timePicker = TimePickerDialog(
-                this, R.style.DatePicker,
+                this, R.style.TimePicker,
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                     //TimePicker 특성 상 한자리 시간 입력에 대한 대응을 해줘야 함
                     historyTime =

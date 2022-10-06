@@ -12,6 +12,7 @@ import com.junjange.soondong.R
 import com.junjange.soondong.databinding.ActivityMainBinding
 import com.junjange.soondong.ui.dialog.EditDialog
 import com.junjange.soondong.ui.matching_detail.MatchingDetailActivity
+import com.junjange.soondong.ui.matching.MatchingActivity
 import com.junjange.soondong.ui.matching_edit.MatchingEditActivity
 import com.junjange.soondong.utils.MyApplication
 
@@ -34,6 +35,12 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
         binding.mainNavigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
+
+        binding.searchBtn.setOnClickListener {
+            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
+
+        }
 
 
         binding.todayMatchBtn.setOnClickListener {
