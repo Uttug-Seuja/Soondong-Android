@@ -7,15 +7,18 @@
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/drawable-v24/ic_baseline_dehaze_24.xml" value="0.294" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.294" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/drawable-v24/layout_background.xml" value="0.294" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_gender.xml" value="0.1875" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_main.xml" value="0.27219202898550726" />
-        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_matching.xml" value="0.2" />
-        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_matching_detail.xml" value="0.1875" />
-        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_matching_edit.xml" value="0.1875" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_matching.xml" value="0.25" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_matching_detail.xml" value="0.234375" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_matching_edit.xml" value="0.5" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/activity_sports.xml" value="0.1875" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/drawer_header.xml" value="0.27219202898550726" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/item_recycler_date.xml" value="0.27219202898550726" />
-        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/item_recycler_match.xml" value="0.27219202898550726" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/item_recycler_match.xml" value="0.5" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/item_recycler_match_data.xml" value="0.27219202898550726" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/row_calendar_date.xml" value="0.67" />
+        <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/layout/temp.xml" value="0.25" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/menu/drawer_navigation.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/menu/toolbar_menu.xml" value="0.33" />
         <entry key="app/src/main/res/drawable-v24/background_top.xml" value="0.1645" />

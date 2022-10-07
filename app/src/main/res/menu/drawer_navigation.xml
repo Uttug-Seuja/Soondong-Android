@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id = "@+id/mainPageDrawer"
-        android:title = "Main Page"
+        android:id = "@+id/myPageDrawer"
+        android:title = "My Page"
         />
     <item
-        android:id = "@+id/allPollsDrawer"
-        android:title = "All Polls"
+        android:id = "@+id/todayMatchDrawer"
+        android:title = "Today Match"
 
 
         />
     <item
-        android:id = "@+id/hotPollsDrawer"
-        android:title = "Hot Polls"
+        android:id = "@+id/newMatchDrawer"
+        android:title = "New Match"
         />
 
     <item
@@ -20,16 +20,6 @@
         android:title = "Search"
         />
 
-    <item
-        android:id = "@+id/myPageDrawer"
-        android:title = "My Page"
-        />
-
-
-    <item
-        android:id = "@+id/newPollDrawer"
-        android:title = "New Poll"
-        />
 
     <item
         android:id = "@+id/logoutDrawer"

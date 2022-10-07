@@ -39,9 +39,9 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="7dp"
                     android:gravity="center_horizontal"
-                    android:text="오순도순동장 :)"
+                    android:text="오순도순"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
+                    android:textSize="24dp"
                     android:textStyle="bold" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -80,10 +80,11 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:layout_gravity="center"
                             android:background="@color/white"
+                            android:src="@drawable/football_ball"
                              />
 
                         <TextView
@@ -91,6 +92,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="sans-serif"
+                            android:layout_gravity="center"
                             android:text="축구"
                             android:textColor="#aeadad"
                             android:textSize="12sp" />
@@ -120,10 +122,11 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:layout_gravity="center"
                             android:background="@color/white"
+                            android:src="@drawable/football"
                              />
 
                         <TextView
@@ -131,6 +134,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="sans-serif"
+                            android:layout_gravity="center"
                             android:text="풋살"
                             android:textColor="#aeadad"
                             android:textSize="12sp" />
@@ -170,10 +174,11 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:layout_gravity="center"
                             android:background="@color/white"
+                            android:src="@drawable/basketball"
                             />
 
                         <TextView
@@ -181,6 +186,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="sans-serif"
+                            android:layout_gravity="center"
                             android:text="농구"
                             android:textColor="#aeadad"
                             android:textSize="12sp" />
@@ -209,10 +215,11 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:layout_gravity="center"
                             android:background="@color/white"
+                            android:src="@drawable/running"
                             />
 
                         <TextView
@@ -221,6 +228,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="sans-serif"
                             android:text="런닝"
+                            android:layout_gravity="center"
                             android:textColor="#aeadad"
                             android:textSize="12sp" />
 
@@ -238,7 +246,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:backgroundTint="#dcdcdc"
+                android:backgroundTint="#007680"
                 app:cardCornerRadius="15sp"
                 app:layout_constraintEnd_toEndOf="@+id/new_poll_btn"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -255,7 +263,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/icon_all_polls"
+                        android:src="@drawable/fire"
                         />
 
                     <TextView
@@ -264,7 +272,7 @@
                         android:layout_marginStart="11dp"
                         android:fontFamily="sans-serif"
                         android:text="오늘의 매칭"
-                        android:textColor="#aeadad"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 

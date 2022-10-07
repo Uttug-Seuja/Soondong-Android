@@ -8,13 +8,16 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.junjange.soondong.R
 import com.junjange.soondong.adapter.CalendarAdapter
+import com.junjange.soondong.adapter.MatchAdapter
 import com.junjange.soondong.data.CalendarDateModel
+import com.junjange.soondong.data.Match
 import com.junjange.soondong.databinding.ActivityMatchingBinding
+import com.junjange.soondong.utils.Constants
 import com.junjange.soondong.utils.HorizontalItemDecoration
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener{
+class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener, MatchAdapter.ItemClickListener{
 
     private val binding by lazy { ActivityMatchingBinding.inflate(layoutInflater) }
     private val viewModel : MatchingViewModel by viewModels()
@@ -22,7 +25,9 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener{
     private val cal = Calendar.getInstance(Locale.KOREA)
     private val currentDate = Calendar.getInstance(Locale.KOREA)
     private val dates = ArrayList<Date>()
-    private lateinit var adapter: CalendarAdapter
+    private lateinit var calendarAdapter: CalendarAdapter
+    private lateinit var matchAdapter: MatchAdapter
+
     private val calendarDateList = ArrayList<CalendarDateModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +36,36 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener{
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        setUpAdapter()
-        setUpClickListener()
+        setUpDateAdapter()
+        setUpDateClickListener()
         setUpCalendar(currentDate.get(Calendar.DATE))
+
+        setMatchView()
+        setObserver()
+
+    }
+
+    private fun setMatchView(){
+        matchAdapter =  MatchAdapter(this).apply {
+            setHasStableIds(true) // 리사이클러 뷰 업데이트 시 깜빡임 방지
+        }
+        binding.rvMatch.adapter = matchAdapter
+    }
+
+    private fun setObserver() {
+
+        val matchList = Constants.getMatches()
+
+        matchAdapter.setData(matchList)
+
+
+
     }
 
     /**
      * 클릭 리스너 설정
      */
-    private fun setUpClickListener() {
+    private fun setUpDateClickListener() {
         binding.ivCalendarNext.setOnClickListener {
             cal.add(Calendar.MONTH, 1)
             if (cal == currentDate)
@@ -60,17 +86,17 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener{
     /**
      * 리사이클러뷰용 어댑터 설정
      */
-    private fun setUpAdapter() {
+    private fun setUpDateAdapter() {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.single_calendar_margin)
         binding.recyclerView.addItemDecoration(HorizontalItemDecoration(spacingInPixels))
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.recyclerView)
 
-        adapter =  CalendarAdapter(this).apply {
+        calendarAdapter =  CalendarAdapter(this).apply {
             setHasStableIds(true) // 리사이클러 뷰 업데이트 시 깜빡임 방지
         }
 
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = calendarAdapter
     }
 
     /**
@@ -94,7 +120,7 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener{
         calendarDateList.addAll(calendarList)
         calendarDateList[0].isSelected = true
 
-        adapter.setData(calendarList)
+        calendarAdapter.setData(calendarList)
     }
 
     // 클릭 리스너
@@ -103,7 +129,13 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener{
             calendarModel.isSelected = index == position
 
         }
-        adapter.setData(calendarDateList)
+        calendarAdapter.setData(calendarDateList)
 
     }
+
+    override fun onItemClickListener(item: Match, position: Int) {
+        TODO("Not yet implemented")
+    }
+
+
 }

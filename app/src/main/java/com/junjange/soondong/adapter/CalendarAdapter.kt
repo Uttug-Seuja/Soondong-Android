@@ -3,25 +3,17 @@ package com.junjange.soondong.adapter
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.junjange.soondong.R
 import com.junjange.soondong.data.CalendarDateModel
-import com.junjange.soondong.databinding.ItemRecyclerMatchBinding
-import com.junjange.soondong.databinding.RowCalendarDateBinding
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
+import com.junjange.soondong.databinding.ItemRecyclerDateBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
 class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
-    private val items = ArrayList<CalendarDateModel>()
+    private var items = ArrayList<CalendarDateModel>()
     private val cal = Calendar.getInstance(Locale.KOREA)
 
 
@@ -33,7 +25,7 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RowCalendarDateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemRecyclerDateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
@@ -46,7 +38,7 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
 
 
 
-    inner class ViewHolder(private val binding: RowCalendarDateBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemRecyclerDateBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(calendarDateModel: CalendarDateModel) {
 
@@ -71,22 +63,64 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
                 cardView.setCardBackgroundColor(
                     ContextCompat.getColor(
                         itemView.context,
-                        R.color.drawer_background
+                        R.color.calender_picker
                     )
                 )
             } else {
-                calendarDay.setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.black
-                    )
-                )
-                calendarDate.setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.black
-                    )
-                )
+
+                when (calendarDateModel.calendarDay){
+
+                    "토" -> {
+                        calendarDay.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.blue
+                            )
+                        )
+                        calendarDate.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.blue
+                            )
+                        )
+
+                    }
+
+                    "일" -> {
+                        calendarDay.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.red
+                            )
+                        )
+                        calendarDate.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.red
+                            )
+                        )
+                    }
+
+                    else -> {
+                        calendarDay.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.black
+                            )
+                        )
+                        calendarDate.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.black
+                            )
+                        )
+
+                    }
+
+
+                }
+
+
                 cardView.setCardBackgroundColor(
                     ContextCompat.getColor(
                         itemView.context,
@@ -114,15 +148,14 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
         return position
     }
 
+    override fun getItemCount() : Int = items.size
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    @SuppressLint("NotifyDataSetChanged")
+    internal fun setData(calendarList: ArrayList<CalendarDateModel>) {
 
-    fun setData(calendarList: ArrayList<CalendarDateModel>) {
-
-        items.clear()
-        items.addAll(calendarList)
+        this.items = calendarList
         notifyDataSetChanged()
+
     }
+
 }

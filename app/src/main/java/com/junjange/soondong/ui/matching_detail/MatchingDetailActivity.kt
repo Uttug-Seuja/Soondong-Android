@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import com.junjange.soondong.R
+import com.junjange.soondong.adapter.MatchAdapter
+import com.junjange.soondong.adapter.MatchDataAdapter
 import com.junjange.soondong.databinding.ActivityMatchingDetailBinding
+import com.junjange.soondong.utils.Constants
 
 class MatchingDetailActivity : AppCompatActivity()  {
     private val binding by lazy { ActivityMatchingDetailBinding.inflate(layoutInflater) }
     private val viewModel : MatchingDetailViewModel by viewModels()
+    private lateinit var matchDataAdapter: MatchDataAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,22 @@ class MatchingDetailActivity : AppCompatActivity()  {
 
 
 //        binding.mainNavigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
+        setMatchView()
+        setObserver()
+    }
+
+    private fun setMatchView(){
+        matchDataAdapter =  MatchDataAdapter().apply {
+            setHasStableIds(true) // 리사이클러 뷰 업데이트 시 깜빡임 방지
+        }
+        binding.rvMatchData.adapter = matchDataAdapter
+    }
+
+    private fun setObserver() {
+        val player = Constants.getPlayer()
+        matchDataAdapter.setData(player)
+
 
 
     }

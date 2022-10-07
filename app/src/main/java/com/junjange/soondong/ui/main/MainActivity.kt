@@ -94,27 +94,21 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 //                startActivity( Intent(this@MainActivity, MainActivity::class.java))
 //
 //            }
-            R.id.allPollsDrawer-> {
+            R.id.myPageDrawer-> {
 //                startActivity( Intent(this@HomeActivity, PollsActivity::class.java))
 
             }
-            R.id.hotPollsDrawer-> {
+            R.id.todayMatchDrawer-> {
 //                startActivity( Intent(this@HomeActivity, HotPollsActivity::class.java))
+
+            }
+
+            R.id.newMatchDrawer-> {
+//                startActivity(Intent(this@HomeActivity, NewPollActivity::class.java))
 
             }
             R.id.searchDrawer-> {
 //                startActivity( Intent(this@HomeActivity, SearchActivity::class.java))
-
-            }
-            R.id.myPageDrawer-> {
-                // My Page 이동
-//                startActivity(Intent(this@HomeActivity, MyPageActivity::class.java))
-
-            }
-
-            R.id.newPollDrawer-> {
-                // My Page 이동
-//                startActivity(Intent(this@HomeActivity, NewPollActivity::class.java))
 
             }
 
