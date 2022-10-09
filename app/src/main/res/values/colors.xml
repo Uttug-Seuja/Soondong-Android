@@ -11,6 +11,7 @@
     <color name="blue">#3534A5</color>
     <color name="drawer_background">#007680</color>
     <color name="calender_picker">#1570ff</color>
+    <color name="calender_soldOut">#FF4D37</color>
 
 
 

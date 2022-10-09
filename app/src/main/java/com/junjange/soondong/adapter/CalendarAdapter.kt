@@ -144,6 +144,8 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
     }
 
 
+
+
     override fun getItemViewType(position: Int): Int {
         return position
     }

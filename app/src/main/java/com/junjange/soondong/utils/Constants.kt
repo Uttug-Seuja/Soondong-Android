@@ -227,7 +227,7 @@ object Constants {
 
         val player16 = Player(
             "20181581",
-            "하*재"
+            "하*은"
         )
 
         playerList.add(player16)

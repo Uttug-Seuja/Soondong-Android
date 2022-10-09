@@ -38,7 +38,9 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
 
         setUpDateAdapter()
         setUpDateClickListener()
-        setUpCalendar(currentDate.get(Calendar.DATE))
+        setUpCalendar(currentDate.get(Calendar.DATE) - 1)
+        binding.recyclerView.scrollToPosition(currentDate.get(Calendar.DATE) - 1)
+
 
         setMatchView()
         setObserver()
@@ -71,7 +73,7 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
             if (cal == currentDate)
                 setUpCalendar(currentDate.get(Calendar.DATE))
             else
-                setUpCalendar(1)
+                setUpCalendar(0)
         }
         binding.ivCalendarPrevious.setOnClickListener {
             cal.add(Calendar.MONTH, -1)
@@ -79,7 +81,7 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
             if (cal == currentDate)
                 setUpCalendar(currentDate.get(Calendar.DATE))
             else
-                setUpCalendar(1)
+                setUpCalendar(0)
         }
     }
 
@@ -109,8 +111,8 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
         val maxDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
         dates.clear()
 
-        monthCalendar.set(Calendar.DAY_OF_MONTH, toDay)
-        while (dates.size < maxDaysInMonth - toDay + 1) {
+        monthCalendar.set(Calendar.DAY_OF_MONTH, 1)
+        while (dates.size < maxDaysInMonth) {
             dates.add(monthCalendar.time)
             calendarList.add(CalendarDateModel(monthCalendar.time))
             monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
@@ -118,7 +120,7 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
 
         calendarDateList.clear()
         calendarDateList.addAll(calendarList)
-        calendarDateList[0].isSelected = true
+        calendarDateList[toDay].isSelected = true
 
         calendarAdapter.setData(calendarList)
     }
@@ -126,7 +128,14 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     // 클릭 리스너
     override fun onItemClickListener(item: CalendarDateModel, position: Int) {
         calendarDateList.forEachIndexed { index, calendarModel ->
-            calendarModel.isSelected = index == position
+//            calendarModel.isSelected = index == position
+            if(index == position){
+                calendarModel.isSelected = true
+//                Log.d("ttt", calendarModel.data.loca)
+                // API 호출
+            }else{
+                calendarModel.isSelected = false
+            }
 
         }
         calendarAdapter.setData(calendarDateList)

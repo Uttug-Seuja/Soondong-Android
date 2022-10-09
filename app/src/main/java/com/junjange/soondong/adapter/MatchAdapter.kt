@@ -19,7 +19,7 @@ class MatchAdapter (val onClickListener: ItemClickListener) : RecyclerView.Adapt
     private val gender = arrayListOf<String>("남녀모두", "남자만", "여자만")
     private val state = arrayListOf<String>("신청가능", "마감임박!", "마감")
     private val stateTextColor = arrayListOf<String>("#FFFFFF", "#FFFFFF", "#cccccc")
-    private val stateBtnColor = arrayListOf<String>("#1570ff", "#ea3e42", "#EEEEEE")
+    private val stateBtnColor = arrayListOf<String>("#1570ff", "#FF4D37", "#EEEEEE")
 
 
     interface ItemClickListener {
