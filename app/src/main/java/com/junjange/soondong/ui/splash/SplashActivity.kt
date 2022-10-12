@@ -8,6 +8,8 @@ import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
 import com.junjange.soondong.R
 import com.junjange.soondong.databinding.ActivitySplashBinding
+import com.junjange.soondong.ui.register.RegisterActivity
+import com.junjange.soondong.ui.signin.SigninActivity
 
 class SplashActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
@@ -59,9 +61,9 @@ class SplashActivity : AppCompatActivity() {
 //
 //                    // 로그인이 되어 있지 않다면 회원가입하러 RegisterActivity 이동
 //                }else{
-//                    val intent = Intent(this, RegisterActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
+                    val intent = Intent(this, SigninActivity::class.java)
+                    startActivity(intent)
+                    finish()
 //                }
 //            }
         }, 500)

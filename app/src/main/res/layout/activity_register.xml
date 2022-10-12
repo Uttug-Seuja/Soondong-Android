@@ -15,7 +15,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        tools:context=".ui.main.MainActivity">
+        tools:context=".ui.main.MainActivity"
+
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/mainToolbar"
@@ -57,6 +59,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/id_edit_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
@@ -71,6 +74,7 @@
                     app:hintTextColor="#979797">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/id_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autoSizeMinTextSize="18dp"
@@ -78,7 +82,6 @@
                         android:hint="아이디"
                         android:letterSpacing="0"
                         android:lineSpacingExtra="-12sp"
-                        android:textColor="#24cc89"
                         android:textSize="18sp"
                         android:textStyle="normal" />
 
@@ -87,6 +90,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_edit_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
@@ -101,6 +105,7 @@
                     app:hintTextColor="#979797">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@id/password_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autoSizeMinTextSize="18dp"
@@ -108,7 +113,6 @@
                         android:hint="비밀번호"
                         android:letterSpacing="0"
                         android:lineSpacingExtra="-12sp"
-                        android:textColor="#24cc89"
                         android:textSize="18sp"
                         android:textStyle="normal" />
 
@@ -117,7 +121,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/name_editTextLayout"
+                    android:id="@+id/name_edit_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
@@ -132,7 +136,7 @@
                     app:hintTextColor="#979797">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/name_editText"
+                        android:id="@+id/name_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autoSizeMinTextSize="18dp"
@@ -140,14 +144,13 @@
                         android:hint="이름"
                         android:letterSpacing="0"
                         android:lineSpacingExtra="-12sp"
-                        android:textColor="#24cc89"
                         android:textSize="18sp"
                         android:textStyle="normal" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/birthDay_editTextLayout"
+                    android:id="@+id/student_id_edit_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
@@ -161,16 +164,15 @@
                     app:hintTextColor="#979797">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/birthDay_editText"
+                        android:id="@+id/student_id_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
-                        android:maxLength="6"
+                        android:maxLength="8"
                         android:hint="학번"
                         android:inputType="number"
                         android:letterSpacing="0"
                         android:lineSpacingExtra="-12sp"
-                        android:textColor="#24cc89"
                         android:textSize="18sp"
                         android:textStyle="normal"
                         tools:layout_editor_absoluteX="1dp"
@@ -211,6 +213,7 @@
                         android:layout_gravity="center"
                         android:orientation="horizontal"
                         android:gravity="center"
+                        android:layout_marginBottom="50dp"
                         >
 
                         <com.google.android.material.card.MaterialCardView
@@ -238,7 +241,7 @@
                                 android:lineSpacingExtra="-7sp"
                                 android:text="남"
                                 android:textColor="#979797"
-                                android:textSize="25sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
 
@@ -269,7 +272,7 @@
                                 android:lineSpacingExtra="-7sp"
                                 android:text="여"
                                 android:textColor="#979797"
-                                android:textSize="25sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
 

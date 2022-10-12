@@ -1,8 +1,7 @@
-package com.junjange.soondong.ui.matching
+package com.junjange.soondong.ui.matching_today
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -13,12 +12,13 @@ import com.junjange.soondong.adapter.MatchAdapter
 import com.junjange.soondong.data.CalendarDateModel
 import com.junjange.soondong.data.Match
 import com.junjange.soondong.databinding.ActivityMatchingBinding
+import com.junjange.soondong.ui.matching.MatchingViewModel
 import com.junjange.soondong.utils.Constants
 import com.junjange.soondong.utils.HorizontalItemDecoration
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener, MatchAdapter.ItemClickListener{
+class MatchingTodayActivity : AppCompatActivity() , CalendarAdapter.ItemClickListener, MatchAdapter.ItemClickListener{
 
     private val binding by lazy { ActivityMatchingBinding.inflate(layoutInflater) }
     private val viewModel : MatchingViewModel by viewModels()

@@ -43,8 +43,8 @@
 
     <!-- Splash 화면 테마 -->
     <style name="Theme.MyApp.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:statusBarColor">#24cc89</item>
-        <item name="android:windowBackground">#24cc89</item>
+        <item name="android:statusBarColor">@color/drawer_background</item>
+        <item name="android:windowBackground">@color/drawer_background</item>
     </style>
 
 

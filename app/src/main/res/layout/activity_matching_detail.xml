@@ -15,7 +15,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.matching.MatchingEditActivity">
+    tools:context=".ui.matching.MatchingEditActivity"
+
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -65,11 +67,6 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:text="10월 5일 수요일 10:00 ~ 12:00"/>
-
-
-
-
-
 
 
                 <TextView
@@ -443,7 +440,7 @@
                     android:textSize="16dp"
                     android:textColor="@color/black"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="50dp"/>
+                    android:layout_marginBottom="100dp"/>
 
 
 
@@ -460,6 +457,70 @@
 
 
     </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
+        android:layout_gravity="bottom">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="#eeeeee"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="지금 신청하면\n진행확정이 빨라져요!"
+            android:layout_margin="20dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/apply_btn"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="#1570ff"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintHorizontal_bias="0.504">
+
+            <TextView
+                android:id="@+id/apply_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="신청하기"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+    </RelativeLayout>
+
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

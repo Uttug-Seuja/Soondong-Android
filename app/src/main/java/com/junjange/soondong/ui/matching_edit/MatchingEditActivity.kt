@@ -71,8 +71,9 @@ class MatchingEditActivity : AppCompatActivity(){
         binding.lifecycleOwner = this
 
         setSupportActionBar(binding.mainToolbar) // 툴바를 액티비티의 앱바로 지정
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
-
 
         title = MyApplication.prefs.getString("title", "")
         sports = MyApplication.prefs.getString("sports", "종목 선택")
@@ -104,6 +105,8 @@ class MatchingEditActivity : AppCompatActivity(){
 
     }
 
+
+
     //액션버튼 메뉴 액션바에 집어 넣기
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
@@ -113,6 +116,11 @@ class MatchingEditActivity : AppCompatActivity(){
     //액션버튼 클릭 했을 때
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId){
+
+            android.R.id.home -> {
+                finish()
+                return super.onOptionsItemSelected(item)
+            }
 
 
             R.id.action_search -> {
