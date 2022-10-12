@@ -18,10 +18,18 @@
         android:theme="@style/Theme.Soondong"
         tools:targetApi="31">
         <activity
-            android:name=".ui.dialog.EditDialog"
-            android:theme="@style/Theme.MyDialog"
+            android:name=".SplashActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".SigninActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.dialog.EditDialog"
+            android:exported="false"
+            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name=".ui.matching_edit.GenderActivity"
             android:exported="false"
@@ -35,16 +43,14 @@
             android:exported="false" />
         <activity
             android:name=".ui.matching_detail.MatchingDetailActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".ui.matching.MatchingActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/Theme.Main.Soondong"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Main.Soondong">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.junjange.soondong.ui.signin.SigninViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        tools:context=".ui.main.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/mainToolbar"
+            android:elevation="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:text="로그인"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+        </androidx.appcompat.widget.Toolbar>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="#eeeeee"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport = "true"
+            android:layout_weight="1">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="fill_vertical">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:maxLength="10"
+                    android:textColorHint="#979797"
+                    android:textSize="18sp"
+                    app:boxStrokeColor="@color/drawer_background"
+                    app:endIconMode="clear_text"
+                    app:hintTextColor="#979797">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoSizeMinTextSize="18dp"
+                        android:backgroundTint="@color/white"
+                        android:hint="아이디"
+                        android:letterSpacing="0"
+                        android:lineSpacingExtra="-12sp"
+                        android:textColor="#24cc89"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:maxLength="10"
+                    android:textColorHint="#979797"
+                    android:textSize="18sp"
+                    app:boxStrokeColor="@color/drawer_background"
+                    app:endIconMode="clear_text"
+                    app:hintTextColor="#979797">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoSizeMinTextSize="18dp"
+                        android:backgroundTint="@color/white"
+                        android:hint="비밀번호"
+                        android:letterSpacing="0"
+                        android:lineSpacingExtra="-12sp"
+                        android:textColor="#24cc89"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/next_btn"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/drawer_background"
+            app:cardCornerRadius="15dp"
+            android:layout_marginBottom="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:letterSpacing="0"
+                android:lineSpacingExtra="-4sp"
+                android:text="다음"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="normal" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+</layout>
