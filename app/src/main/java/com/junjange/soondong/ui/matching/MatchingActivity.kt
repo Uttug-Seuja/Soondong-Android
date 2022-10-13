@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.junjange.soondong.R
@@ -21,7 +22,7 @@ import java.util.*
 class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener, MatchAdapter.ItemClickListener{
 
     private val binding by lazy { ActivityMatchingBinding.inflate(layoutInflater) }
-    private val viewModel : MatchingViewModel by viewModels()
+    private val viewModel by lazy { ViewModelProvider(this, MatchingViewModel.Factory(application))[MatchingViewModel::class.java] }
     private val sdf = SimpleDateFormat("yyyy년 MMMM", Locale.KOREA)
     private val cal = Calendar.getInstance(Locale.KOREA)
     private val currentDate = Calendar.getInstance(Locale.KOREA)
@@ -54,7 +55,7 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     }
 
     private fun setMatchView(){
-        matchAdapter =  MatchAdapter(this).apply {
+        matchAdapter =  MatchAdapter(this,this).apply {
             setHasStableIds(true) // 리사이클러 뷰 업데이트 시 깜빡임 방지
         }
         binding.rvMatch.adapter = matchAdapter
@@ -150,6 +151,9 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
 
     override fun onItemClickListener(item: Match, position: Int) {
         TODO("Not yet implemented")
+
+
+
     }
 
 

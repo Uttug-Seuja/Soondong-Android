@@ -14,6 +14,7 @@ import com.junjange.soondong.ui.main.MainActivity
 import com.junjange.soondong.ui.matching.MatchingActivity
 import com.junjange.soondong.ui.register.RegisterActivity
 import com.junjange.soondong.ui.register.RegisterViewModel
+import com.junjange.soondong.utils.MyApplication
 
 class SigninActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySigninBinding.inflate(layoutInflater) }
@@ -21,6 +22,7 @@ class SigninActivity : AppCompatActivity() {
 
     private var userId : String? = null
     private var userPassword : String? = null
+    private var memberId : String? = null
     private var userGender : Boolean? = null
     private var flag : Boolean = false
     private var googleEmail: String? = null
@@ -33,7 +35,6 @@ class SigninActivity : AppCompatActivity() {
 
     private var totalFlag = 0
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -42,7 +43,9 @@ class SigninActivity : AppCompatActivity() {
 
 
         binding.localSignInBt.setOnClickListener {
+
             startActivity( Intent(this@SigninActivity, RegisterActivity::class.java))
+            finish()
 
 
         }
@@ -86,6 +89,9 @@ class SigninActivity : AppCompatActivity() {
 //            keyBordHide()
             binding.idEditText.clearFocus()
             binding.passwordEditText.clearFocus()
+
+            memberId = "-1" // 임시로 -1 지정
+            MyApplication.prefs.setString("memberId", memberId.toString())
 
             startActivity( Intent(this@SigninActivity, MainActivity::class.java))
             finish()

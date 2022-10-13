@@ -19,6 +19,7 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.junjange.soondong.R
@@ -26,6 +27,7 @@ import com.junjange.soondong.adapter.CalendarAdapter
 import com.junjange.soondong.data.CalendarDateModel
 import com.junjange.soondong.databinding.ActivityMatchingEditBinding
 import com.junjange.soondong.ui.main.MainActivity
+import com.junjange.soondong.ui.matching_detail.MatchingDetailViewModel
 import com.junjange.soondong.utils.HorizontalItemDecoration
 import com.junjange.soondong.utils.MyApplication
 import java.text.SimpleDateFormat
@@ -35,7 +37,7 @@ import java.util.*
 class MatchingEditActivity : AppCompatActivity(){
 
     private val binding by lazy { ActivityMatchingEditBinding.inflate(layoutInflater) }
-    private val viewModel : MatchingEditViewModel by viewModels()
+    private val viewModel by lazy { ViewModelProvider(this, MatchingEditViewModel.Factory(application))[MatchingEditViewModel::class.java] }
 
     private var title : String? = null
     private var sports : String? = null

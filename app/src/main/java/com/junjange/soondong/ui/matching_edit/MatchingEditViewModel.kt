@@ -1,6 +1,46 @@
 package com.junjange.soondong.ui.matching_edit
 
+import android.app.Application
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonObject
+import com.junjange.soondong.data.ReservesCreation
+import com.junjange.soondong.data.ReservesEdit
+import com.junjange.soondong.data.ReservesSportDate
+import com.junjange.soondong.repository.MatchingEditRepository
+import com.junjange.soondong.repository.MatchingTodayRepository
+import kotlinx.coroutines.launch
 
-class MatchingEditViewModel : ViewModel() {
+class MatchingEditViewModel(private val repository: MatchingEditRepository) : ViewModel(){
+    private val _retrofitReservesEditText = MutableLiveData<JsonObject>()
+    private val _reservesCreationRetrofit = MutableLiveData<JsonObject>()
+
+
+    val retrofitReservesEditText: MutableLiveData<JsonObject>
+        get() = _retrofitReservesEditText
+
+    val reservesCreationRetrofit: MutableLiveData<JsonObject>
+        get() = _reservesCreationRetrofit
+
+    fun reservesEditRetrofit(reservesEdit: ReservesEdit) = viewModelScope.launch{
+        _retrofitReservesEditText.value = repository.retrofitReservesEdit(reservesEdit)
+
+    }
+
+    fun reservesCreationRetrofit(reservesCreation: ReservesCreation) = viewModelScope.launch{
+        _reservesCreationRetrofit.value = repository.retrofitReservesCreation(reservesCreation)
+
+    }
+
+
+    // factory pattern
+    class Factory(private val application: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return MatchingEditViewModel(MatchingEditRepository.getInstance(application)!!) as T
+        }
+    }
+
+
 }

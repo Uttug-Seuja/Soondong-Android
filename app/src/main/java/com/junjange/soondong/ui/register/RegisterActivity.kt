@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.junjange.soondong.R
 import com.junjange.soondong.databinding.ActivityRegisterBinding
 import com.junjange.soondong.ui.main.MainActivity
+import com.junjange.soondong.ui.signin.SigninActivity
 
 class RegisterActivity : AppCompatActivity() {
     private val binding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
@@ -106,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
         binding.nextBtn.setOnClickListener {
-            startActivity( Intent(this@RegisterActivity, MainActivity::class.java))
+            startActivity( Intent(this@RegisterActivity, SigninActivity::class.java))
             finish()
 
         }

@@ -14,6 +14,8 @@ import com.junjange.soondong.ui.dialog.EditDialog
 import com.junjange.soondong.ui.matching_detail.MatchingDetailActivity
 import com.junjange.soondong.ui.matching.MatchingActivity
 import com.junjange.soondong.ui.matching_edit.MatchingEditActivity
+import com.junjange.soondong.ui.matching_today.MatchingTodayActivity
+import com.junjange.soondong.ui.register.RegisterActivity
 import com.junjange.soondong.utils.MyApplication
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
@@ -37,19 +39,39 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         binding.mainNavigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
 
-        binding.searchBtn.setOnClickListener {
+        // 축구 매칭
+        binding.footballBtn.setOnClickListener {
+            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
+
+        }
+
+        // 풋살 매칭
+        binding.futsalBtn.setOnClickListener {
+            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
+
+        }
+
+        // 농구 매칭
+        binding.basketballBtn.setOnClickListener {
+            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
+
+        }
+
+        // 런닝 매칭
+        binding.runningBtn.setOnClickListener {
             startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
 
         }
 
 
+        // 오늘의 경기
         binding.todayMatchBtn.setOnClickListener {
-            startActivity( Intent(this@MainActivity, MatchingDetailActivity::class.java))
+            startActivity( Intent(this@MainActivity, MatchingTodayActivity::class.java))
 
         }
 
 
-
+        // 게시글 작성
         binding.newMatchBtn.setOnClickListener {
 
             val title = MyApplication.prefs.getString("title", "")
@@ -114,6 +136,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
             R.id.logoutDrawer-> {
                 // 로그아웃
+
+                MyApplication.prefs.setString("memberId", "")
+                startActivity( Intent(this@MainActivity, RegisterActivity::class.java))
+                finish()
 
             }
 

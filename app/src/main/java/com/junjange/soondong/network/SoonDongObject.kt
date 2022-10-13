@@ -39,7 +39,7 @@ object SoonDongObject {
             .build()
     }
 
-    val getRetrofitService : SoonDongObject by lazy{
-        getRetrofit.create(SoonDongObject::class.java)
+    val getRetrofitService : SoonDongInterface by lazy{
+        getRetrofit.create(SoonDongInterface::class.java)
     }
 }

@@ -49,7 +49,7 @@ class MatchDataAdapter () : RecyclerView.Adapter<MatchDataAdapter.ViewHolder>() 
     }
 
 
-    override fun getItemCount() : Int = 20
+    override fun getItemCount() : Int = items.size
 
 
     @SuppressLint("NotifyDataSetChanged")

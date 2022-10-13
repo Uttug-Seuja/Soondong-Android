@@ -3,21 +3,19 @@ package com.junjange.soondong.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.junjange.soondong.R
 import com.junjange.soondong.data.CalendarDateModel
 import com.junjange.soondong.data.Match
+import com.junjange.soondong.data.Player
 import com.junjange.soondong.databinding.ItemRecyclerMatchBinding
+import com.junjange.soondong.databinding.ItemRecyclerMatchDataBinding
+import com.junjange.soondong.databinding.ItemRecylcerMatchTodayBinding
 import com.junjange.soondong.ui.matching_detail.MatchingDetailActivity
-import java.util.*
-import kotlin.collections.ArrayList
 
-class MatchAdapter (val onClickListener: ItemClickListener, val context: Context) : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
+class MatchTodayAdapter(val onClickListener: ItemClickListener, val context: Context) : RecyclerView.Adapter<MatchTodayAdapter.ViewHolder>() {
     private var items = ArrayList<Match>()
     private val gender = arrayListOf<String>("남녀모두", "남자만", "여자만")
     private val state = arrayListOf<String>("신청가능", "마감임박!", "마감")
@@ -33,7 +31,7 @@ class MatchAdapter (val onClickListener: ItemClickListener, val context: Context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemRecyclerMatchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemRecylcerMatchTodayBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
@@ -43,11 +41,12 @@ class MatchAdapter (val onClickListener: ItemClickListener, val context: Context
 
         holder.bind(items[position])
         holder.clickItem(items[position])
+
     }
 
 
 
-    inner class ViewHolder(private val binding: ItemRecyclerMatchBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemRecylcerMatchTodayBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(match: Match) {
             binding.startTimeText.text = match.startTime
@@ -62,7 +61,7 @@ class MatchAdapter (val onClickListener: ItemClickListener, val context: Context
         }
 
         fun clickItem(item: Match){
-            binding.matchCardView.setOnClickListener {
+            binding.matchTodayCardView.setOnClickListener {
 
                 // 원하는 화면 연결
                 Intent(context, MatchingDetailActivity::class.java).apply {

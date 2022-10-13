@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.junjange.soondong.R
 import com.junjange.soondong.adapter.MatchAdapter
 import com.junjange.soondong.adapter.MatchDataAdapter
 import com.junjange.soondong.databinding.ActivityMatchingDetailBinding
+import com.junjange.soondong.ui.matching.MatchingViewModel
 import com.junjange.soondong.utils.Constants
 
 class MatchingDetailActivity : AppCompatActivity()  {
     private val binding by lazy { ActivityMatchingDetailBinding.inflate(layoutInflater) }
-    private val viewModel : MatchingDetailViewModel by viewModels()
+    private val viewModel by lazy { ViewModelProvider(this, MatchingDetailViewModel.Factory(application))[MatchingDetailViewModel::class.java] }
+
     private lateinit var matchDataAdapter: MatchDataAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
