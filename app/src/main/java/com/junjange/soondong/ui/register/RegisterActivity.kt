@@ -8,9 +8,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.ViewModelProvider
 import com.junjange.soondong.R
+import com.junjange.soondong.data.User
 import com.junjange.soondong.databinding.ActivityRegisterBinding
 import com.junjange.soondong.ui.main.MainActivity
 import com.junjange.soondong.ui.signin.SigninActivity
+import com.junjange.soondong.utils.MyApplication
 
 class RegisterActivity : AppCompatActivity() {
     private val binding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
@@ -19,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
     private var userPassword : String? = null
     private var userName : String? = null
     private var userStudentId : String? = null
-    private var userGender : Boolean? = null
+    private var userGender : String? = null
     private var flag : Boolean = false
     private var googleEmail: String? = null
 
@@ -40,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         // 사용자 남자 성별 클릭
         binding.manBtn.setOnClickListener{
 
-            userGender = true
+            userGender = "남자"
             binding.manBtn.strokeColor = Color.parseColor("#007680")
             binding.womanBtn.strokeColor = Color.parseColor("#d9d9d9")
         }
@@ -48,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
         // 사용자 여자 성별 클릭
         binding.womanBtn.setOnClickListener {
 
-            userGender = false
+            userGender = "여자"
             binding.womanBtn.strokeColor = Color.parseColor("#007680")
             binding.manBtn.strokeColor = Color.parseColor("#d9d9d9")
 
@@ -106,7 +108,30 @@ class RegisterActivity : AppCompatActivity() {
 
             }
         })
+
+        // 회원가입 버튼
         binding.nextBtn.setOnClickListener {
+            viewModel.signUpRetrofit(User(
+                userName.toString(),
+                userStudentId.toString(),
+                userGender.toString(),
+                userId.toString(),
+                userPassword.toString(),
+                userGender.toString()
+            ))
+
+
+            viewModel.retrofitSignUpText.value.let {
+                viewModel.retrofitSignUpText.observe(this){
+
+//                    if (it.){
+//                        MyApplication.prefs.setString("memberId", memberId.toString())
+//                        startActivity( Intent(this@SigninActivity, MainActivity::class.java))
+//                        finish()
+//
+//                    }
+                }
+            }
             startActivity( Intent(this@RegisterActivity, SigninActivity::class.java))
             finish()
 

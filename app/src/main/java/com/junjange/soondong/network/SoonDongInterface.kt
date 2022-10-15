@@ -34,13 +34,12 @@ interface SoonDongInterface {
         @Body participation: Participation,
     ): Response<JsonObject>
 
-    // 수정 필요
     // 참가 취소
-//    @Headers("Content-Type: application/json")
-//    @DELETE(API.DELETE_PARTICIPATION)
-//    suspend fun deleteParticipation(
-//        @Body participationId: Int,
-//    ): Response<JsonObject>
+    @Headers("Content-Type: application/json")
+    @DELETE(API.DELETE_PARTICIPATION)
+    suspend fun deleteParticipation(
+        @Body participation: Participation,
+    ): Response<JsonObject>
 
     // 매칭에 참가한 유저 확인
     @GET(API.GET_PARTICIPANT_USER_INFO)

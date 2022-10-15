@@ -1,14 +1,23 @@
 package com.junjange.soondong.ui.matching_detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.junjange.soondong.R
 import com.junjange.soondong.adapter.MatchAdapter
 import com.junjange.soondong.adapter.MatchDataAdapter
+import com.junjange.soondong.data.Participation
 import com.junjange.soondong.databinding.ActivityMatchingDetailBinding
+import com.junjange.soondong.ui.main.MainActivity
 import com.junjange.soondong.ui.matching.MatchingViewModel
 import com.junjange.soondong.utils.Constants
 
@@ -18,11 +27,19 @@ class MatchingDetailActivity : AppCompatActivity()  {
 
     private lateinit var matchDataAdapter: MatchDataAdapter
 
+    private var bottomSheetDialog : BottomSheetDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+
+//        setView()
+        setMatchView()
+        setObserver()
+
         /**
          * drawer
          *
@@ -33,10 +50,43 @@ class MatchingDetailActivity : AppCompatActivity()  {
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
 
-//        binding.mainNavigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
-        setMatchView()
-        setObserver()
+        binding.applyBtn.setOnClickListener {
+//            viewModel.postParticipationRetrofit(Participation(1, 2))
+//            viewModel.deleteParticipationRetrofit(Participation(1, 2))
+
+        }
+
+        /**
+         * bottomSheetView
+         *
+         * */
+        val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+        bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog!!.setContentView(bottomSheetView)
+        bottomSheetView.findViewById<View>(R.id.mainToolbar).setOnClickListener {
+            bottomSheetDialog!!.dismiss()
+        }
+
+        bottomSheetView.findViewById<View>(R.id.delete_btn).setOnClickListener {
+//            viewModel.deleteReservesRetrofit(1)
+            bottomSheetDialog!!.dismiss()
+        }
+
+        bottomSheetView.findViewById<View>(R.id.cancel_btn).setOnClickListener {
+            bottomSheetDialog!!.dismiss()
+        }
+
+
+    }
+
+    private fun setView(){
+        viewModel.reservesInfoRetrofit(1)
+        viewModel.retrofitReservesInfoText.observe(this){
+            viewModel.retrofitReservesInfoText.value.let {
+
+            }
+        }
     }
 
     private fun setMatchView(){
@@ -47,18 +97,40 @@ class MatchingDetailActivity : AppCompatActivity()  {
     }
 
     private fun setObserver() {
+
         val player = Constants.getPlayer()
         matchDataAdapter.setData(player)
+//        viewModel.participantUserInfoRetrofit(1)
+//        viewModel.retrofitParticipantUserInfoText.observe(this){
+//            viewModel.retrofitParticipantUserInfoText.value.let {
+//                matchDataAdapter.setData(it.playerData)
+//
+//            }
+//        }
 
 
 
     }
 
+    //액션버튼 메뉴 액션바에 집어 넣기
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_ham_menu, menu)
+        return true
+    }
+
+    //액션버튼 클릭 했을 때
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home->{ // 메뉴 버튼
                 finish()
 //                binding.mainDrawerLayout.openDrawer(GravityCompat.START)    // 네비게이션 드로어 열기
+            }
+
+            R.id.action_menu -> {
+                bottomSheetDialog!!.show()
+
+
+                return super.onOptionsItemSelected(item)
             }
         }
         return super.onOptionsItemSelected(item)

@@ -62,10 +62,10 @@ class MatchingDetailViewModel(private val repository: MatchingDetailRepository) 
     }
 
     // 경기 참여 취소
-//    fun deleteParticipationRetrofit(participationId: Int) = viewModelScope.launch{
-//        _retrofitDeleteParticipationText.value = repository.retrofitDeleteParticipation(participationId)
-//
-//    }
+    fun deleteParticipationRetrofit(participation: Participation) = viewModelScope.launch{
+        _retrofitDeleteParticipationText.value = repository.retrofitDeleteParticipation(participation)
+
+    }
 
 
     // factory pattern

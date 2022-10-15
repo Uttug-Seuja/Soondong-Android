@@ -2,6 +2,7 @@ package com.junjange.soondong.ui.matching_today
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +27,7 @@ class MatchingTodayActivity : AppCompatActivity() , MatchTodayAdapter.ItemClickL
     private val binding by lazy { ActivityMatchingTodayBinding.inflate(layoutInflater) }
     private val viewModel by lazy { ViewModelProvider(this, MatchingTodayViewModel.Factory(application))[MatchingTodayViewModel::class.java] }
 
-    private val sdf = SimpleDateFormat("yyyy년 MMMM", Locale.KOREA)
+    private val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
     private val cal = Calendar.getInstance(Locale.KOREA)
     private val currentDate = Calendar.getInstance(Locale.KOREA)
     private val dates = ArrayList<Date>()
@@ -65,6 +66,16 @@ class MatchingTodayActivity : AppCompatActivity() , MatchTodayAdapter.ItemClickL
 
         matchTodayAdapter.setData(matchList)
 
+//        viewModel.reservesSportTodayRetrofit(sdf.format(cal.time).toString())
+
+//        viewModel.retrofitReservesSportTodayText.observe(this){
+//            viewModel.retrofitReservesSportTodayText.value.let {
+//                matchTodayAdapter.setData(it)
+//
+//
+//            }
+//
+//        }
 
 
     }

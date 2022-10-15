@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/drawable-v24/background_top.xml" value="0.294" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/drawable-v24/ic_baseline_dehaze_24.xml" value="0.294" />
         <entry key="..\:/Users/cho/Desktop/JunJangE/github/soondong-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.294" />
@@ -20,10 +21,13 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable-v24/layout_background.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/background_blue.xml" value="0.1615" />
+        <entry key="app/src/main/res/drawable/bottom_sheet_background.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/dialog_bg.xml" value="0.1635" />
+        <entry key="app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_next.xml" value="0.1615" />
         <entry key="app/src/main/res/drawable/ic_previous.xml" value="0.1615" />
+        <entry key="app/src/main/res/drawable/line_view.xml" value="0.1635" />
         <entry key="app/src/main/res/layout/activity_edit_dialog.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_gender.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.15520833333333334" />
@@ -36,6 +40,7 @@
         <entry key="app/src/main/res/layout/activity_signin.xml" value="0.1546875" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_sports.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.15416666666666667" />
         <entry key="app/src/main/res/layout/drawer_header.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/fragment.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.15520833333333334" />
@@ -46,6 +51,8 @@
         <entry key="app/src/main/res/layout/item_recylcer_match_today.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/row_calendar_date.xml" value="0.15416666666666667" />
         <entry key="app/src/main/res/layout/temp.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/drawer_navigation.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/menu/toolbar_ham_menu.xml" value="0.15416666666666667" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.3098958333333333" />
       </map>
     </option>

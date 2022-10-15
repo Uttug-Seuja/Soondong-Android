@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.junjange.soondong.R
+import com.junjange.soondong.data.Login
 import com.junjange.soondong.databinding.ActivityRegisterBinding
 import com.junjange.soondong.databinding.ActivitySigninBinding
 import com.junjange.soondong.ui.main.MainActivity
@@ -90,11 +91,24 @@ class SigninActivity : AppCompatActivity() {
             binding.idEditText.clearFocus()
             binding.passwordEditText.clearFocus()
 
-            memberId = "-1" // 임시로 -1 지정
-            MyApplication.prefs.setString("memberId", memberId.toString())
+//            memberId = "-1" // 임시로 -1 지정
+            MyApplication.prefs.setString("memberId", "")
 
-            startActivity( Intent(this@SigninActivity, MainActivity::class.java))
-            finish()
+
+            viewModel.signInRetrofit(Login(userId.toString(), userPassword.toString()))
+
+            // 로그인 로직
+            viewModel.retrofitSignInText.value.let {
+                viewModel.retrofitSignInText.observe(this){
+                    if (it.playerData.isNotEmpty()){
+                        MyApplication.prefs.setString("memberId", memberId.toString())
+                        startActivity( Intent(this@SigninActivity, MainActivity::class.java))
+                        finish()
+                    }
+                }
+            }
+
+
         }
     }
 }

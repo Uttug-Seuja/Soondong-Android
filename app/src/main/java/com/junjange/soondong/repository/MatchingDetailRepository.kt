@@ -55,11 +55,11 @@ class MatchingDetailRepository (application : Application) {
     }
 
     // 경기 참여 취소
-//    suspend fun retrofitDeleteParticipation(participationId: Int): JsonObject {
-//        val response = SoonDongObject.getRetrofitService.deleteParticipation(participationId)
-//
-//        return response.body() as JsonObject
-//    }
+    suspend fun retrofitDeleteParticipation(participation: Participation): JsonObject {
+        val response = SoonDongObject.getRetrofitService.deleteParticipation(participation)
+
+        return response.body() as JsonObject
+    }
 
 
 

@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.SnapHelper
 import com.junjange.soondong.R
 import com.junjange.soondong.adapter.CalendarAdapter
 import com.junjange.soondong.data.CalendarDateModel
+import com.junjange.soondong.data.ReservesCreation
 import com.junjange.soondong.databinding.ActivityMatchingEditBinding
 import com.junjange.soondong.ui.main.MainActivity
 import com.junjange.soondong.ui.matching_detail.MatchingDetailViewModel
@@ -126,7 +127,7 @@ class MatchingEditActivity : AppCompatActivity(){
 
 
             R.id.action_search -> {
-                startActivity(Intent(this, MainActivity::class.java))
+                matchCrateClickListener()
 
                 return super.onOptionsItemSelected(item)
             }
@@ -303,32 +304,47 @@ class MatchingEditActivity : AppCompatActivity(){
         }
 
 
+
+
+    }
+
+    private fun matchCrateClickListener() {
+        val userId = MyApplication.prefs.getString("MemberId", "")
+
+
+
         // 작성 완료 및 업로드 버튼 눌렀을 때 진입
-//        binding.buttonUploadHistory.setOnClickListener {
-//            if (binding.editHistoryTitle.text.isEmpty() || binding.editHistoryPlace.text.isEmpty() || historyDate == null || historyTime == null) {
-//                if (binding.editHistoryTitle.text.isEmpty()) binding.editHistoryTitle.error = "제목은 필수입력 항목입니다."
-//                if (binding.editHistoryPlace.text.isEmpty()) binding.editHistoryPlace.error = "장소명은 필수입력 항목입니다."
-//                if (historyDate == null) {
-//                    Toast.makeText(this, "날짜를 입력해주세요", Toast.LENGTH_LONG).show()
-//                }
-//                if (historyTime == null) {
-//                    Toast.makeText(this, "시간을 입력해주세요", Toast.LENGTH_LONG).show()
-//                }
-//            } else {
-//                historyTitle = binding.editHistoryTitle.text.toString()
-//                historyComment = binding.editHistoryContent.text.toString()
-//                historyPlaceTitle = binding.editHistoryPlace.text.toString()
-//                historyCreatedAt = historyDate + historyTime
-//
-//                // 날짜 및 시각은 LocalDateTime 객체 형태로 Request 해야함
-//                val localTime = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    LocalDateTime.parse(historyCreatedAt)
-//                } else {
-//                    TODO("VERSION.SDK_INT < O")
-//                }
-//
-//            }
-//        }
+            if (binding.editHistoryTitle.text.isEmpty() || binding.editHistoryPlace.text.isEmpty() || historyDate == null || historyTime == null) {
+                if (binding.editHistoryTitle.text.isEmpty()) binding.editHistoryTitle.error = "제목은 필수입력 항목입니다."
+                if (binding.editHistoryPlace.text.isEmpty()) binding.editHistoryPlace.error = "장소명은 필수입력 항목입니다."
+                if (historyDate == null) {
+                    Toast.makeText(this, "날짜를 입력해주세요", Toast.LENGTH_LONG).show()
+                }
+                if (historyTime == null) {
+                    Toast.makeText(this, "시간을 입력해주세요", Toast.LENGTH_LONG).show()
+                }
+            } else {
+//                viewModel.reservesCreationRetrofit(ReservesCreation(
+//                    userId.toInt(),
+//                    title.toString(),
+//                    content.toString(),
+//                    recruit!!.toInt(),
+//                    sports.toString(),
+//                    matchingEndTime.toString(),
+//                    matchingStartTime.toString(),
+//                    matchingDate.toString(),
+//                    place.toString(),
+//                    gender.toString()
+//                ))
+
+                // 날짜 및 시각은 LocalDateTime 객체 형태로 Request 해야함
+                val localTime = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LocalDateTime.parse(historyCreatedAt)
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }
+
+            }
 
     }
 }

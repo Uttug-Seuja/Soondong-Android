@@ -67,6 +67,15 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
 
         matchAdapter.setData(matchList)
 
+//        viewModel.retrofitReservesInfoRetrofit("SOCCER", sdf.format(cal.time).toString())
+//
+//        viewModel.reservesSportDateText.observe(this){
+//            viewModel.reservesSportDateText.value.let {
+//                matchAdapter.setData(it)
+//
+//            }
+//        }
+
 
 
     }
@@ -77,18 +86,29 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     private fun setUpDateClickListener() {
         binding.ivCalendarNext.setOnClickListener {
             cal.add(Calendar.MONTH, 1)
-            if (cal == currentDate)
-                setUpCalendar(currentDate.get(Calendar.DATE))
-            else
+            if (cal == currentDate) {
+                setUpCalendar(currentDate.get(Calendar.DATE) -1)
+                binding.recyclerView.scrollToPosition(currentDate.get(Calendar.DATE) - 1 + 4)
+                Log.d("ttt", currentDate.get(Calendar.DATE).toString())
+
+            }else{
                 setUpCalendar(0)
+                binding.recyclerView.scrollToPosition(0)
+
+            }
         }
         binding.ivCalendarPrevious.setOnClickListener {
             cal.add(Calendar.MONTH, -1)
 
-            if (cal == currentDate)
-                setUpCalendar(currentDate.get(Calendar.DATE))
-            else
+            if (cal == currentDate) {
+                setUpCalendar(currentDate.get(Calendar.DATE) -1 )
+                binding.recyclerView.scrollToPosition(currentDate.get(Calendar.DATE) - 1 + 4)
+
+            }else{
                 setUpCalendar(0)
+                binding.recyclerView.scrollToPosition(0)
+
+            }
         }
     }
 
@@ -138,7 +158,7 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
 //            calendarModel.isSelected = index == position
             if(index == position){
                 calendarModel.isSelected = true
-//                Log.d("ttt", calendarModel.data.loca)
+//                viewModel.retrofitReservesInfoRetrofit("SOCCER", sdf.format(cal.time).toString())
                 // API 호출
             }else{
                 calendarModel.isSelected = false
@@ -151,9 +171,6 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
 
     override fun onItemClickListener(item: Match, position: Int) {
         TODO("Not yet implemented")
-
-
-
     }
 
 
