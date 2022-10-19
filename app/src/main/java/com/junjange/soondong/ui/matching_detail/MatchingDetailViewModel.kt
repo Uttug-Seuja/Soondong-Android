@@ -58,12 +58,16 @@ class MatchingDetailViewModel(private val repository: MatchingDetailRepository) 
     // 경기 참여
     fun postParticipationRetrofit(participation: Participation) = viewModelScope.launch{
         _retrofitPostParticipationText.value = repository.retrofitPostParticipation(participation)
+        _retrofitReservesInfoText.value = repository.retrofitReservesInfo(participation.reserveId)
+        _retrofitParticipantUserInfoText.value = repository.retrofitParticipantUserInfo(participation.reserveId)
 
     }
 
     // 경기 참여 취소
     fun deleteParticipationRetrofit(participation: Participation) = viewModelScope.launch{
         _retrofitDeleteParticipationText.value = repository.retrofitDeleteParticipation(participation)
+        _retrofitReservesInfoText.value = repository.retrofitReservesInfo(participation.reserveId)
+        _retrofitParticipantUserInfoText.value = repository.retrofitParticipantUserInfo(participation.reserveId)
 
     }
 

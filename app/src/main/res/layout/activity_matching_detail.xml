@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
         <variable
@@ -9,9 +11,6 @@
     </data>
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -58,18 +57,24 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 >
+
+
+
+
+
                 <TextView
+                    android:id="@+id/match_day_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="20dp"
-                    android:textSize="22dp"
-                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:text="10월 5일 수요일 10:00 ~ 12:00"
                     android:textColor="@color/black"
-                    android:text="10월 5일 수요일 10:00 ~ 12:00"/>
-
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/match_place_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
@@ -86,6 +91,44 @@
                     android:textColor="@color/black"
                     android:text="충청남도 아산시 싱창면 순청향로 22"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp">
+
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/talk"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/match_reserve_user_name_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:textSize="14dp"
+                            android:textColor="@color/black"
+                            android:text="조준장"/>
+
+                        <TextView
+                            android:id="@+id/match_reserve_user_student_id_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:textSize="12dp"
+                            android:text="20181566"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
 
                 <View
@@ -96,19 +139,22 @@
 
 
                 <TextView
+                    android:id="@+id/match_title_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="18dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:textColor="@color/black"
                     android:text="우리 함께 축구할 사람~~~"/>
 
                 <TextView
+                    android:id="@+id/match_explanation_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="14dp"
                     android:layout_marginStart="20dp"
-
+                    android:layout_marginEnd="20dp"
                     android:textStyle="bold"
                     android:text="스자 6명 있습니다."/>
 
@@ -189,6 +235,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/match_gender_text"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
@@ -222,16 +269,17 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/field"
+                            android:src="@drawable/sneakers"
                             />
 
                         <TextView
+                            android:id="@+id/match_shoes_text"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
                             android:textSize="18dp"
                             android:textColor="@color/black"
-                            android:text="11vs11"/>
+                            android:text="풋살화/운동화"/>
 
                     </LinearLayout>
 
@@ -251,6 +299,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/match_recruitment_num_text"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
@@ -275,20 +324,21 @@
 
                     >
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/sneakers"
-                        />
+<!--                    <ImageView-->
+<!--                        android:layout_width="24dp"-->
+<!--                        android:layout_height="24dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:src="@drawable/sneakers"-->
+<!--                        />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"
-                        android:text="풋살화/운동화"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/match_shoes_text"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:textSize="18dp"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:text="풋살화/운동화"/>-->
 
                 </LinearLayout>
 
@@ -473,6 +523,7 @@
 
 
         <TextView
+            android:id="@+id/apply_explanation_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -486,12 +537,15 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/apply_btn"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             app:cardBackgroundColor="#1570ff"
             app:cardCornerRadius="8dp"
             app:layout_constraintHorizontal_bias="0.504">

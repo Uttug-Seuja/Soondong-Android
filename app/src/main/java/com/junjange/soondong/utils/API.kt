@@ -7,7 +7,7 @@ object API {
 
     // participants
     const val POST_PARTICIPATION : String = "/participants/participation"
-    const val DELETE_PARTICIPATION : String = "/participants/{participationId}/delete"
+    const val DELETE_PARTICIPATION : String = "/participants/delete"
     const val GET_PARTICIPANT_USER_INFO : String = "/participants/{reserveId}/users-info"
 
     // users

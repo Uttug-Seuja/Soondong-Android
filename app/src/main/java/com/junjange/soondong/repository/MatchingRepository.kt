@@ -20,11 +20,10 @@ class MatchingRepository (application : Application) {
 
     // Use Retrofit
     suspend fun retrofitReservesSportDate(sport: String, today: String): ReservesSportDate {
-        val response = SoonDongObject.getRetrofitService.getReservesSportDate(sport, "2000-01-03")
+        val response = SoonDongObject.getRetrofitService.getReservesSportDate(sport, today)
         Log.d("ttt", today.toString())
 
-        Log.d("tttresponse.body()", response.body().toString())
-        Log.d("tttresponse", response.toString())
+        Log.d("ttt", "tttt")
 
 
         return if (response.isSuccessful) response.body() as ReservesSportDate else ReservesSportDate(ArrayList())

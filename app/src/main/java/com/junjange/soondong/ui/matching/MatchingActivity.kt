@@ -74,6 +74,7 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
 //        matchAdapter.setData(matchList)
 
         viewModel.retrofitReservesInfoRetrofit(sportType, sdfRv.format(cal.time).toString())
+        Log.d("ttt", cal.time.toString())
 
         viewModel.reservesSportDateText.observe(this){
             viewModel.reservesSportDateText.value.let {

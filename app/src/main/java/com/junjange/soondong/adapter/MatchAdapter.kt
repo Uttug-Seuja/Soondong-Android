@@ -29,11 +29,11 @@ class MatchAdapter (val onClickListener: ItemClickListener, val context: Context
     private var items = ArrayList<ReservesSportDateData>()
 //    private val gender = arrayListOf<String>("남녀모두", "남자만", "여자만")
     private val gender = hashMapOf<String, String>("ALL" to "남녀모두", "MAN" to "남자만", "WOMAN" to "여자만" )
-    private val recruitmentNum = hashMapOf<String, String>("SOCCER" to "11vs11", "FUTSAL" to "6vs6", "RUNNING" to "최대인원", "BASKETBALL" to "8vs8"  )
+    private val recruitmentNum = hashMapOf<String, String>("SOCCER" to "11vs11", "FUTSAL" to "6vs6", "RUNNING" to "최대인원", "BASKETBALL" to "8vs8")
+    private val reserveStatus = hashMapOf<String, String>("POSSIBLE" to "신청가능" , "IMMINENT" to "마감임박!",  "DEADLINE" to "마감" )
+    private val stateTextColor = hashMapOf<String, String>("POSSIBLE" to "#FFFFFF" , "IMMINENT" to "#FFFFFF",  "DEADLINE" to "#cccccc" )
+    private val stateBtnColor = hashMapOf<String, String>("POSSIBLE" to "#1570ff" , "IMMINENT" to "#FF4D37",  "DEADLINE" to "#EEEEEE" )
 
-    private val state = arrayListOf<String>("신청가능", "마감임박!", "마감")
-    private val stateTextColor = arrayListOf<String>("#FFFFFF", "#FFFFFF", "#cccccc")
-    private val stateBtnColor = arrayListOf<String>("#1570ff", "#FF4D37", "#EEEEEE")
 
 
     interface ItemClickListener {
@@ -66,9 +66,9 @@ class MatchAdapter (val onClickListener: ItemClickListener, val context: Context
             binding.endTimeText.text = reservesSportDateData.endT.substring(0, 5)
             binding.titleText.text = reservesSportDateData.title
             binding.subTitleText.text = "${gender[reservesSportDateData.gender]}•${recruitmentNum[reservesSportDateData.sport]}•모든레벨"
-//            binding.stateBtn.setCardBackgroundColor(Color.parseColor(stateBtnColor[reservesSportDateData.state]))
-//            binding.stateText.text = state[reservesSportDateData.state]
-//            binding.stateText.setTextColor(Color.parseColor(stateTextColor[reservesSportDateData.state]))
+            binding.stateBtn.setCardBackgroundColor(Color.parseColor(stateBtnColor[reservesSportDateData.reserveStatus]))
+            binding.stateText.text = reserveStatus[reservesSportDateData.reserveStatus]
+            binding.stateText.setTextColor(Color.parseColor(stateTextColor[reservesSportDateData.reserveStatus]))
 
 
         }
@@ -79,6 +79,8 @@ class MatchAdapter (val onClickListener: ItemClickListener, val context: Context
                 Intent(context, MatchingDetailActivity::class.java).apply {
                     // 데이터 전달
                     putExtra("reserveId", reservesSportDateData.reserveId)
+                    Log.d("ttt", reservesSportDateData.userId.toString())
+                    putExtra("userId", reservesSportDateData.userId)
 
                 }.run {
                     //액티비티 열기

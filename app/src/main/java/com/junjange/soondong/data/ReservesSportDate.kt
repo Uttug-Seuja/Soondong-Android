@@ -17,6 +17,7 @@ data class ReservesSportDateData(
     @SerializedName("gender") val gender: String,
     @SerializedName("reserveId") val reserveId: Int,
     @SerializedName("reserveStatus") val reserveStatus: String,
+    @SerializedName("userId") val userId: Int,
 
 
 

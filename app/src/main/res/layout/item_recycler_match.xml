@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_toStartOf="@+id/state_btn"
             android:layout_toEndOf="@+id/event_time"
             android:orientation="vertical">
@@ -74,7 +75,9 @@
                 android:gravity="center"
                 android:text="순천향대학교 대운동장"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/sub_title_text"

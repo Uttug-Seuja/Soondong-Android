@@ -36,7 +36,7 @@ interface SoonDongInterface {
 
     // 참가 취소
     @Headers("Content-Type: application/json")
-    @DELETE(API.DELETE_PARTICIPATION)
+    @HTTP(method = "DELETE", path = API.DELETE_PARTICIPATION, hasBody = true)
     suspend fun deleteParticipation(
         @Body participation: Participation,
     ): Response<JsonObject>
