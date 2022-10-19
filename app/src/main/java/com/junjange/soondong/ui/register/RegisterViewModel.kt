@@ -12,10 +12,10 @@ import com.junjange.soondong.repository.RegisterRepository
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val repository: RegisterRepository) : ViewModel(){
-    private val _retrofitSignUpText = MutableLiveData<JsonObject>()
+    private val _retrofitSignUpText = MutableLiveData<Boolean>()
 
 
-    val retrofitSignUpText: MutableLiveData<JsonObject>
+    val retrofitSignUpText: MutableLiveData<Boolean>
         get() = _retrofitSignUpText
 
 

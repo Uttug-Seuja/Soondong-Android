@@ -1,7 +1,9 @@
 package com.junjange.soondong.utils
 
+import com.junjange.soondong.BuildConfig
+
 object API {
-    const val BASE_URL : String = "" // 서버 주소
+    const val BASE_URL : String = BuildConfig.BASE_URL // 서버 주소
 
     // participants
     const val POST_PARTICIPATION : String = "/participants/participation"
@@ -17,10 +19,10 @@ object API {
     const val POST_RESERVES_CREATION : String = "/reserves/creation"
     const val POST_RESERVES_EDIT : String = "/reserves/{reserveId}/edit"
     const val DELETE_RESERVES : String = "/reserves/{reserveId}/delete"
-    const val GET_RESERVES_SPORT_DATE : String = "/reserves/get/sports-date?sport={sport}&day={day}               "
-    const val GET_RESERVES_SPORT_TODAY : String = "/reserves/get/today-sport?today={today}"
+    const val GET_RESERVES_SPORT_DATE : String = "/reserves/get/sports-date"
+    const val GET_RESERVES_SPORT_TODAY : String = "/reserves/get/today-sport"
     const val GET_RESERVES_Info : String = "/reserves/{reserveId}/reserve-info"
 
 
-
+//    http://localhost:8080/reserves/get/sports-date?sport=SOCCER&day=2000-01-03
 }

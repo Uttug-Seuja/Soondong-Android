@@ -11,6 +11,16 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:networkSecurityConfig="@xml/network_security_config"
+
+
+
+
+
+
+
+
+
+
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/togetherness"
         android:label="오순도순"

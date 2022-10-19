@@ -3,6 +3,7 @@ package com.junjange.soondong.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,12 +17,12 @@ import com.junjange.soondong.ui.matching.MatchingActivity
 import com.junjange.soondong.ui.matching_edit.MatchingEditActivity
 import com.junjange.soondong.ui.matching_today.MatchingTodayActivity
 import com.junjange.soondong.ui.register.RegisterActivity
+import com.junjange.soondong.ui.signin.SigninActivity
 import com.junjange.soondong.utils.MyApplication
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel : MainViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -39,28 +40,35 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         binding.mainNavigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
 
+
+        Log.d("ttt",MyApplication.prefs.getString("memberId", "").toString())
         // 축구 매칭
         binding.footballBtn.setOnClickListener {
-            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
+            val intent = Intent(this@MainActivity, MatchingActivity::class.java)
+            intent.putExtra("sportsType", "SOCCER")
+            startActivity(intent)
 
         }
 
         // 풋살 매칭
         binding.futsalBtn.setOnClickListener {
-            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
-
+            val intent = Intent(this@MainActivity, MatchingActivity::class.java)
+            intent.putExtra("sportsType", "FUTSAL")
+            startActivity(intent)
         }
 
         // 농구 매칭
         binding.basketballBtn.setOnClickListener {
-            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
-
+            val intent = Intent(this@MainActivity, MatchingActivity::class.java)
+            intent.putExtra("sportsType", "BASKETBALL")
+            startActivity(intent)
         }
 
         // 런닝 매칭
         binding.runningBtn.setOnClickListener {
-            startActivity( Intent(this@MainActivity, MatchingActivity::class.java))
-
+            val intent = Intent(this@MainActivity, MatchingActivity::class.java)
+            intent.putExtra("sportsType", "RUNNING")
+            startActivity(intent)
         }
 
 
@@ -135,10 +143,22 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             }
 
             R.id.logoutDrawer-> {
+
+
                 // 로그아웃
 
+                MyApplication.prefs.setString("title", "")
+                MyApplication.prefs.setString("sports", "종목 선택")
+                MyApplication.prefs.setString("place", "")
+                MyApplication.prefs.setString("recruit", "")
+                MyApplication.prefs.setString("gender", "모집 성별")
+                MyApplication.prefs.setString("matchingDate", "매칭 날짜")
+                MyApplication.prefs.setString("matchingStartTime", "매칭 시작시간")
+                MyApplication.prefs.setString("matchingEndTime", "매칭 종료시간")
+                MyApplication.prefs.setString("content", "")
+
                 MyApplication.prefs.setString("memberId", "")
-                startActivity( Intent(this@MainActivity, RegisterActivity::class.java))
+                startActivity( Intent(this@MainActivity, SigninActivity::class.java))
                 finish()
 
             }

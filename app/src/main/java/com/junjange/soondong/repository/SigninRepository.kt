@@ -3,8 +3,9 @@ package com.junjange.soondong.repository
 import android.app.Application
 import android.util.Log
 import com.google.gson.JsonObject
+import com.junjange.soondong.data.DataInt
 import com.junjange.soondong.data.Login
-import com.junjange.soondong.data.Player1
+import com.junjange.soondong.data.Player
 import com.junjange.soondong.network.SoonDongObject
 
 class SigninRepository (application : Application) {
@@ -22,13 +23,13 @@ class SigninRepository (application : Application) {
 
 
     // Use Retrofit
-    suspend fun retrofitSignIn(login: Login): Player1 {
+    suspend fun retrofitSignIn(login: Login): DataInt {
         val response = SoonDongObject.getRetrofitService.postUsersLogin(login)
 
         Log.d("ttt", response.toString())
         Log.d("ttt", response.isSuccessful.toString())
         Log.d("ttt", response.body().toString())
-        return response.body() as Player1
+        return if (response.isSuccessful) response.body() as DataInt else DataInt(-1)
 
 
     }

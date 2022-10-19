@@ -29,6 +29,7 @@ import com.junjange.soondong.data.ReservesCreation
 import com.junjange.soondong.databinding.ActivityMatchingEditBinding
 import com.junjange.soondong.ui.main.MainActivity
 import com.junjange.soondong.ui.matching_detail.MatchingDetailViewModel
+import com.junjange.soondong.ui.signin.SigninActivity
 import com.junjange.soondong.utils.HorizontalItemDecoration
 import com.junjange.soondong.utils.MyApplication
 import java.text.SimpleDateFormat
@@ -49,6 +50,9 @@ class MatchingEditActivity : AppCompatActivity(){
     private var matchingStartTime : String? = null
     private var matchingEndTime : String? = null
     private var content : String? = null
+    private var member : Int? = null
+    private val genderMap = hashMapOf<String, String>("남녀 모두" to "ALL", "남자만" to "MAN", "여자만" to "WOMAN" )
+    private val sportsMap = hashMapOf<String, String>("축구" to "SOCCER", "풋살" to "FUTSAL", "런닝" to "RUNNING", "농구" to "BASKETBALL" )
 
     var historyTitle: String? = null
     var historyMood: String? = null
@@ -85,8 +89,9 @@ class MatchingEditActivity : AppCompatActivity(){
         gender = MyApplication.prefs.getString("gender", "모집 성별")
         matchingDate = MyApplication.prefs.getString("matchingDate", "매칭 날짜")
         matchingStartTime = MyApplication.prefs.getString("matchingStartTime", "매칭 시작시간")
-        matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "매칭 종료시")
+        matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "매칭 종료시간")
         content = MyApplication.prefs.getString("content", "")
+        member = MyApplication.prefs.getString("memberId", "-1").toInt()
 
 
         binding.editHistoryTitle.setText(title)
@@ -100,6 +105,7 @@ class MatchingEditActivity : AppCompatActivity(){
         binding.editHistoryContent.setText(content)
 
 
+        historyDate = matchingDate
         addTextChangedListener()
         setOnClickListener()
 
@@ -222,7 +228,7 @@ class MatchingEditActivity : AppCompatActivity(){
                         else "$dayOfMonth"
 
                     binding.editHistoryDate.text = historyDate
-                    MyApplication.prefs.setString("editHistoryDate", historyDate.toString())
+                    MyApplication.prefs.setString("matchingDate", historyDate.toString())
 
 
                     historyDate += "T"
@@ -238,14 +244,17 @@ class MatchingEditActivity : AppCompatActivity(){
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                     //TimePicker 특성 상 한자리 시간 입력에 대한 대응을 해줘야 함
                     historyTime =
-                        if (hourOfDay < 10) "0$hourOfDay:"
-                        else hourOfDay.toString() + ":"
+                        if (hourOfDay < 10) "0${hourOfDay}시"
+                        else hourOfDay.toString() + "시"
                     historyTime +=
-                        if (minute < 10) "0$minute"
-                        else minute.toString()
+                        if (minute < 10) " 0${minute}분"
+                        else " ${minute}분"
+                    Log.d("ttt", historyTime.toString())
+                    Log.d("ttt", hourOfDay.toString())
+                    Log.d("ttt", minute.toString())
 
-                    binding.editHistoryStartTime.text = hourOfDay.toString() + "시 " + minute.toString() + "분"
-                    MyApplication.prefs.setString("matchingStartTime", hourOfDay.toString() + "시 " + minute.toString() + "분")
+                    binding.editHistoryStartTime.text =historyTime.toString()
+                    MyApplication.prefs.setString("matchingStartTime", historyTime.toString())
 
                 }, hour, minute, false
             )
@@ -275,14 +284,14 @@ class MatchingEditActivity : AppCompatActivity(){
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                     //TimePicker 특성 상 한자리 시간 입력에 대한 대응을 해줘야 함
                     historyTime =
-                        if (hourOfDay < 10) "0$hourOfDay:"
-                        else hourOfDay.toString() + ":"
+                        if (hourOfDay < 10) "0${hourOfDay}시"
+                        else hourOfDay.toString() + "시"
                     historyTime +=
-                        if (minute < 10) "0$minute"
-                        else minute.toString()
+                        if (minute < 10) " 0${minute}분"
+                        else " ${minute}분"
 
-                    binding.editHistoryEndTime.text = hourOfDay.toString() + "시 " + minute.toString() + "분"
-                    MyApplication.prefs.setString("matchingEndTime", hourOfDay.toString() + "시 " + minute.toString() + "분")
+                    binding.editHistoryEndTime.text = historyTime.toString()
+                    MyApplication.prefs.setString("matchingEndTime", historyTime.toString())
 
                 }, hour, minute, false
             )
@@ -309,40 +318,40 @@ class MatchingEditActivity : AppCompatActivity(){
     }
 
     private fun matchCrateClickListener() {
-        val userId = MyApplication.prefs.getString("MemberId", "")
-
-
 
         // 작성 완료 및 업로드 버튼 눌렀을 때 진입
-            if (binding.editHistoryTitle.text.isEmpty() || binding.editHistoryPlace.text.isEmpty() || historyDate == null || historyTime == null) {
+            if (binding.editHistoryTitle.text.isEmpty() || binding.editHistoryPlace.text.isEmpty() || binding.editHistoryDate.text == "매칭 날짜") {
                 if (binding.editHistoryTitle.text.isEmpty()) binding.editHistoryTitle.error = "제목은 필수입력 항목입니다."
                 if (binding.editHistoryPlace.text.isEmpty()) binding.editHistoryPlace.error = "장소명은 필수입력 항목입니다."
-                if (historyDate == null) {
+                if (binding.editHistoryDate.text == "매칭 날짜") {
                     Toast.makeText(this, "날짜를 입력해주세요", Toast.LENGTH_LONG).show()
                 }
-                if (historyTime == null) {
-                    Toast.makeText(this, "시간을 입력해주세요", Toast.LENGTH_LONG).show()
-                }
-            } else {
-//                viewModel.reservesCreationRetrofit(ReservesCreation(
-//                    userId.toInt(),
-//                    title.toString(),
-//                    content.toString(),
-//                    recruit!!.toInt(),
-//                    sports.toString(),
-//                    matchingEndTime.toString(),
-//                    matchingStartTime.toString(),
-//                    matchingDate.toString(),
-//                    place.toString(),
-//                    gender.toString()
-//                ))
 
-                // 날짜 및 시각은 LocalDateTime 객체 형태로 Request 해야함
-                val localTime = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    LocalDateTime.parse(historyCreatedAt)
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }
+            } else {
+                matchingStartTime = MyApplication.prefs.getString("matchingStartTime", "")
+                matchingStartTime = matchingStartTime!!.replace("시 ", ":").replace("분", ":00")
+                matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "")
+                matchingEndTime = matchingEndTime!!.replace("시 ", ":").replace("분", ":00")
+
+
+
+                viewModel.reservesCreationRetrofit(ReservesCreation(
+                    member!!.toInt(),
+                    title.toString(),
+                    content.toString(),
+                    recruit!!.toInt(),
+                    sportsMap[sports].toString(),
+                    matchingStartTime.toString() ,
+                    matchingEndTime.toString(),
+                    matchingDate.toString(),
+                    place.toString(),
+                    genderMap[gender].toString()
+                ))
+
+
+                finish()
+
+
 
             }
 

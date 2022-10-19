@@ -3,6 +3,7 @@ package com.junjange.soondong.ui.matching_detail
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -20,6 +21,7 @@ import com.junjange.soondong.databinding.ActivityMatchingDetailBinding
 import com.junjange.soondong.ui.main.MainActivity
 import com.junjange.soondong.ui.matching.MatchingViewModel
 import com.junjange.soondong.utils.Constants
+import com.junjange.soondong.utils.MyApplication
 
 class MatchingDetailActivity : AppCompatActivity()  {
     private val binding by lazy { ActivityMatchingDetailBinding.inflate(layoutInflater) }
@@ -28,15 +30,17 @@ class MatchingDetailActivity : AppCompatActivity()  {
     private lateinit var matchDataAdapter: MatchDataAdapter
 
     private var bottomSheetDialog : BottomSheetDialog? = null
+    private var reserveId : String? = null
+    private var userId : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-
-//        setView()
+        reserveId = intent.getIntExtra("reserveId", 0).toString()
+        userId = MyApplication.prefs.getString("memberId", "")
+        // setView()
         setMatchView()
         setObserver()
 
@@ -52,7 +56,7 @@ class MatchingDetailActivity : AppCompatActivity()  {
 
 
         binding.applyBtn.setOnClickListener {
-//            viewModel.postParticipationRetrofit(Participation(1, 2))
+            viewModel.postParticipationRetrofit(Participation(userId!!.toInt(), reserveId!!.toInt()))
 //            viewModel.deleteParticipationRetrofit(Participation(1, 2))
 
         }
@@ -81,7 +85,7 @@ class MatchingDetailActivity : AppCompatActivity()  {
     }
 
     private fun setView(){
-        viewModel.reservesInfoRetrofit(1)
+        viewModel.reservesInfoRetrofit(reserveId!!.toInt())
         viewModel.retrofitReservesInfoText.observe(this){
             viewModel.retrofitReservesInfoText.value.let {
 
@@ -98,15 +102,15 @@ class MatchingDetailActivity : AppCompatActivity()  {
 
     private fun setObserver() {
 
-        val player = Constants.getPlayer()
-        matchDataAdapter.setData(player)
-//        viewModel.participantUserInfoRetrofit(1)
-//        viewModel.retrofitParticipantUserInfoText.observe(this){
-//            viewModel.retrofitParticipantUserInfoText.value.let {
-//                matchDataAdapter.setData(it.playerData)
-//
-//            }
-//        }
+//        val player = Constants.getPlayer()
+//        matchDataAdapter.setData(player)
+        viewModel.participantUserInfoRetrofit(reserveId!!.toInt())
+        viewModel.retrofitParticipantUserInfoText.observe(this){
+            viewModel.retrofitParticipantUserInfoText.value.let {
+                matchDataAdapter.setData(it!!.playerData)
+
+            }
+        }
 
 
 

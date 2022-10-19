@@ -25,12 +25,15 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     private val viewModel by lazy { ViewModelProvider(this, MatchingViewModel.Factory(application))[MatchingViewModel::class.java] }
     private val sdf = SimpleDateFormat("yyyy년 MMMM", Locale.KOREA)
     private val cal = Calendar.getInstance(Locale.KOREA)
+    private val sdfRv = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+
     private val currentDate = Calendar.getInstance(Locale.KOREA)
     private val dates = ArrayList<Date>()
     private lateinit var calendarAdapter: CalendarAdapter
     private lateinit var matchAdapter: MatchAdapter
 
     private val calendarDateList = ArrayList<CalendarDateModel>()
+    private var sportType = "SOCCER"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,9 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+
+
+        sportType = intent.getStringExtra("sportsType").toString()
 
         setUpDateAdapter()
         setUpDateClickListener()
@@ -63,18 +69,18 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
 
     private fun setObserver() {
 
-        val matchList = Constants.getMatches()
-
-        matchAdapter.setData(matchList)
-
-//        viewModel.retrofitReservesInfoRetrofit("SOCCER", sdf.format(cal.time).toString())
+//        val matchList = Constants.getMatches()
 //
-//        viewModel.reservesSportDateText.observe(this){
-//            viewModel.reservesSportDateText.value.let {
-//                matchAdapter.setData(it)
-//
-//            }
-//        }
+//        matchAdapter.setData(matchList)
+
+        viewModel.retrofitReservesInfoRetrofit(sportType, sdfRv.format(cal.time).toString())
+
+        viewModel.reservesSportDateText.observe(this){
+            viewModel.reservesSportDateText.value.let {
+                matchAdapter.setData(it!!.reservesSportDateData)
+
+            }
+        }
 
 
 
@@ -134,6 +140,7 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     private fun setUpCalendar(toDay : Int) {
         val calendarList = ArrayList<CalendarDateModel>()
         binding.tvDateMonth.text = sdf.format(cal.time)
+
         val monthCalendar = cal.clone() as Calendar
         val maxDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
         dates.clear()
@@ -155,11 +162,13 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     // 클릭 리스너
     override fun onItemClickListener(item: CalendarDateModel, position: Int) {
         calendarDateList.forEachIndexed { index, calendarModel ->
+
+
 //            calendarModel.isSelected = index == position
             if(index == position){
                 calendarModel.isSelected = true
-//                viewModel.retrofitReservesInfoRetrofit("SOCCER", sdf.format(cal.time).toString())
-                // API 호출
+                viewModel.retrofitReservesInfoRetrofit(sportType, sdfRv.format(calendarModel.data).toString())
+
             }else{
                 calendarModel.isSelected = false
             }

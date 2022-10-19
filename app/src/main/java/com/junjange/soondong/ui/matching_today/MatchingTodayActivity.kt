@@ -62,20 +62,20 @@ class MatchingTodayActivity : AppCompatActivity() , MatchTodayAdapter.ItemClickL
 
     private fun setObserver() {
 
-        val matchList = Constants.getMatches()
-
-        matchTodayAdapter.setData(matchList)
-
-//        viewModel.reservesSportTodayRetrofit(sdf.format(cal.time).toString())
-
-//        viewModel.retrofitReservesSportTodayText.observe(this){
-//            viewModel.retrofitReservesSportTodayText.value.let {
-//                matchTodayAdapter.setData(it)
+//        val matchList = Constants.getMatches()
 //
-//
-//            }
-//
-//        }
+//        matchTodayAdapter.setData(matchList)
+
+        viewModel.reservesSportTodayRetrofit(sdf.format(cal.time).toString())
+
+        viewModel.retrofitReservesSportTodayText.observe(this){
+            viewModel.retrofitReservesSportTodayText.value.let {
+                matchTodayAdapter.setData(it!!.reservesSportDateData)
+
+
+            }
+
+        }
 
 
     }

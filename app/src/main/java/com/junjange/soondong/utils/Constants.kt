@@ -103,189 +103,189 @@ object Constants {
 
     }
 
-    fun getPlayer() : ArrayList<Player> {
-        val playerList = ArrayList<Player>()
-        // 1
-        val player1 = Player(
-            "20181566",
-            "조*장"
-        )
-
-        playerList.add(player1)
-
-        val player2 = Player(
-            "20181567",
-            "김*우"
-        )
-
-        playerList.add(player2)
-
-
-        val player3 = Player(
-            "20181568",
-            "이*희"
-        )
-
-        playerList.add(player3)
-
-
-        val player4 = Player(
-            "20181569",
-            "이*일"
-        )
-
-        playerList.add(player4)
-
-
-        val player5 = Player(
-            "20181570",
-            "김*준"
-        )
-
-        playerList.add(player5)
-
-
-        val player6 = Player(
-            "20181571",
-            "조*환"
-        )
-
-        playerList.add(player6)
-
-
-        val player7 = Player(
-            "20181572",
-            "유*현"
-        )
-
-        playerList.add(player7)
-
-
-        val player8 = Player(
-            "20181573",
-            "김*수"
-        )
-
-        playerList.add(player8)
-
-
-        val player9 = Player(
-            "20181574",
-            "조*재"
-        )
-
-        playerList.add(player9)
-
-
-        val player10 = Player(
-            "20181575",
-            "이*주"
-        )
-
-        playerList.add(player10)
-
-
-        val player11 = Player(
-            "20181576",
-            "박*우"
-        )
-
-        playerList.add(player11)
-
-
-        val player12 = Player(
-            "20181577",
-            "한*준"
-        )
-
-        playerList.add(player12)
-
-
-        val player13 = Player(
-            "20181578",
-            "한*남"
-        )
-
-        playerList.add(player13)
-
-
-        val player14 = Player(
-            "20181579",
-            "최*혁"
-        )
-
-        playerList.add(player14)
-
-
-        val player15 = Player(
-            "20181580",
-            "장*석"
-        )
-
-        playerList.add(player15)
-
-
-        val player16 = Player(
-            "20181581",
-            "하*은"
-        )
-
-        playerList.add(player16)
-
-
-        val player17 = Player(
-            "20181582",
-            "허*재"
-        )
-
-        playerList.add(player17)
-
-
-        val player18 = Player(
-            "20181583",
-            "신*용"
-        )
-
-        playerList.add(player18)
-
-
-        val player19 = Player(
-            "20181584",
-            "김*용"
-        )
-
-        playerList.add(player19)
-
-
-        val player20 = Player(
-            "20181585",
-            "송*석"
-        )
-
-        playerList.add(player20)
-
-
-        val player21 = Player(
-            "20181586",
-            "김*지"
-        )
-
-        playerList.add(player21)
-
-
-        val player22 = Player(
-            "20181587",
-            "이*혜"
-        )
-
-        playerList.add(player22)
-
-
-
-
-        return playerList
-
-    }
+//    fun getPlayer() : ArrayList<Player> {
+//        val playerList = ArrayList<Player>()
+//        // 1
+//        val player1 = Player(
+//            "20181566",
+//            "조*장"
+//        )
+//
+//        playerList.add(player1)
+//
+//        val player2 = Player(
+//            "20181567",
+//            "김*우"
+//        )
+//
+//        playerList.add(player2)
+//
+//
+//        val player3 = Player(
+//            "20181568",
+//            "이*희"
+//        )
+//
+//        playerList.add(player3)
+//
+//
+//        val player4 = Player(
+//            "20181569",
+//            "이*일"
+//        )
+//
+//        playerList.add(player4)
+//
+//
+//        val player5 = Player(
+//            "20181570",
+//            "김*준"
+//        )
+//
+//        playerList.add(player5)
+//
+//
+//        val player6 = Player(
+//            "20181571",
+//            "조*환"
+//        )
+//
+//        playerList.add(player6)
+//
+//
+//        val player7 = Player(
+//            "20181572",
+//            "유*현"
+//        )
+//
+//        playerList.add(player7)
+//
+//
+//        val player8 = Player(
+//            "20181573",
+//            "김*수"
+//        )
+//
+//        playerList.add(player8)
+//
+//
+//        val player9 = Player(
+//            "20181574",
+//            "조*재"
+//        )
+//
+//        playerList.add(player9)
+//
+//
+//        val player10 = Player(
+//            "20181575",
+//            "이*주"
+//        )
+//
+//        playerList.add(player10)
+//
+//
+//        val player11 = Player(
+//            "20181576",
+//            "박*우"
+//        )
+//
+//        playerList.add(player11)
+//
+//
+//        val player12 = Player(
+//            "20181577",
+//            "한*준"
+//        )
+//
+//        playerList.add(player12)
+//
+//
+//        val player13 = Player(
+//            "20181578",
+//            "한*남"
+//        )
+//
+//        playerList.add(player13)
+//
+//
+//        val player14 = Player(
+//            "20181579",
+//            "최*혁"
+//        )
+//
+//        playerList.add(player14)
+//
+//
+//        val player15 = Player(
+//            "20181580",
+//            "장*석"
+//        )
+//
+//        playerList.add(player15)
+//
+//
+//        val player16 = Player(
+//            "20181581",
+//            "하*은"
+//        )
+//
+//        playerList.add(player16)
+//
+//
+//        val player17 = Player(
+//            "20181582",
+//            "허*재"
+//        )
+//
+//        playerList.add(player17)
+//
+//
+//        val player18 = Player(
+//            "20181583",
+//            "신*용"
+//        )
+//
+//        playerList.add(player18)
+//
+//
+//        val player19 = Player(
+//            "20181584",
+//            "김*용"
+//        )
+//
+//        playerList.add(player19)
+//
+//
+//        val player20 = Player(
+//            "20181585",
+//            "송*석"
+//        )
+//
+//        playerList.add(player20)
+//
+//
+//        val player21 = Player(
+//            "20181586",
+//            "김*지"
+//        )
+//
+//        playerList.add(player21)
+//
+//
+//        val player22 = Player(
+//            "20181587",
+//            "이*혜"
+//        )
+//
+//        playerList.add(player22)
+//
+//
+//
+//
+//        return playerList
+//
+//    }
 
 
 }

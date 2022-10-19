@@ -24,7 +24,7 @@ interface SoonDongInterface {
     @POST(API.POST_USERS_LOGIN)
     suspend fun postUsersLogin(
         @Body login: Login,
-    ): Response<Player1>
+    ): Response<DataInt>
 
 
     // 참가 신청
@@ -46,7 +46,7 @@ interface SoonDongInterface {
     suspend fun getParticipantUserInfo(
         @Path("reserveId") reserveId : Int,
 
-        ): Response<Player1>
+        ): Response<Player>
 
     // 경기 생성
     @Headers("Content-Type: application/json")
@@ -75,8 +75,8 @@ interface SoonDongInterface {
     @Headers("Content-Type: application/json")
     @GET(API.GET_RESERVES_SPORT_DATE)
     suspend fun getReservesSportDate(
-        @Path("sport") sport : String,
-        @Path("day") day : String,
+        @Query("sport") sport : String,
+        @Query("day") day : String,
 
 
         ): Response<ReservesSportDate>
@@ -86,7 +86,7 @@ interface SoonDongInterface {
     @Headers("Content-Type: application/json")
     @GET(API.GET_RESERVES_SPORT_TODAY)
     suspend fun getReservesSportToday(
-        @Path("today") today : String,
+        @Query("today") today : String,
 
 
         ): Response<ReservesSportDate>

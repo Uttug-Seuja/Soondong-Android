@@ -4,7 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.google.gson.JsonObject
 import com.junjange.soondong.data.Participation
-import com.junjange.soondong.data.Player1
+import com.junjange.soondong.data.Player
 import com.junjange.soondong.data.ReservesEdit
 import com.junjange.soondong.data.ReservesInfo
 import com.junjange.soondong.network.SoonDongObject
@@ -34,10 +34,12 @@ class MatchingDetailRepository (application : Application) {
     }
 
     // 경기를 참여하는 사용자 정보들
-    suspend fun retrofitParticipantUserInfo(reserveId: Int): Player1 {
+    suspend fun retrofitParticipantUserInfo(reserveId: Int): Player {
         val response = SoonDongObject.getRetrofitService.getParticipantUserInfo(reserveId)
 
-        return response.body() as Player1
+        Log.d("ttt", response.body().toString())
+
+        return response.body() as Player
     }
 
     // 경기 삭제

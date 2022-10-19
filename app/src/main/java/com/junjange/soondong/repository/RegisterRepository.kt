@@ -21,14 +21,15 @@ class RegisterRepository (application : Application) {
     }
 
     // Use Retrofit
-    suspend fun retrofitSignUp(user: User): JsonObject {
+    suspend fun retrofitSignUp(user: User): Boolean {
         val response = SoonDongObject.getRetrofitService.postUsersCreation(user)
 
         Log.d("tttresponse.body()", response.body().toString())
         Log.d("tttresponse", response.toString())
 
 
-        return if (response.isSuccessful) response.body() as JsonObject else JsonObject()
+
+        return response.isSuccessful
 
     }
 

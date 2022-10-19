@@ -91,17 +91,13 @@ class SigninActivity : AppCompatActivity() {
             binding.idEditText.clearFocus()
             binding.passwordEditText.clearFocus()
 
-//            memberId = "-1" // 임시로 -1 지정
-            MyApplication.prefs.setString("memberId", "")
-
-
             viewModel.signInRetrofit(Login(userId.toString(), userPassword.toString()))
 
             // 로그인 로직
             viewModel.retrofitSignInText.value.let {
                 viewModel.retrofitSignInText.observe(this){
-                    if (it.playerData.isNotEmpty()){
-                        MyApplication.prefs.setString("memberId", memberId.toString())
+                    if (it.dataInt != -1){
+                        MyApplication.prefs.setString("memberId", it.dataInt.toString())
                         startActivity( Intent(this@SigninActivity, MainActivity::class.java))
                         finish()
                     }

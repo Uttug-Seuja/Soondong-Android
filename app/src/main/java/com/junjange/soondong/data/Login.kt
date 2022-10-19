@@ -1,6 +1,6 @@
 package com.junjange.soondong.data
 
 data class Login(
-    val id : String,
+    val loginId : String,
     val password : String
 )

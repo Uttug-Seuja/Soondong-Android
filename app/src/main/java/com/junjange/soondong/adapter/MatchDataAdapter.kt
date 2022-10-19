@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.junjange.soondong.data.CalendarDateModel
 import com.junjange.soondong.data.Player
+import com.junjange.soondong.data.PlayerData
 import com.junjange.soondong.databinding.ItemRecyclerMatchDataBinding
 
 class MatchDataAdapter () : RecyclerView.Adapter<MatchDataAdapter.ViewHolder>() {
-    private var items = ArrayList<Player>()
+    private var items = ArrayList<PlayerData>()
 
 
 
@@ -30,9 +31,9 @@ class MatchDataAdapter () : RecyclerView.Adapter<MatchDataAdapter.ViewHolder>() 
 
     inner class ViewHolder(private val binding: ItemRecyclerMatchDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(player: Player) {
-            binding.studentIdText.text = player.studentId
-            binding.nameText.text = player.name
+        fun bind(playerData: PlayerData) {
+            binding.studentIdText.text = playerData.schoolNum
+            binding.nameText.text = playerData.name
 
         }
 
@@ -53,7 +54,7 @@ class MatchDataAdapter () : RecyclerView.Adapter<MatchDataAdapter.ViewHolder>() 
 
 
     @SuppressLint("NotifyDataSetChanged")
-    internal fun setData(player: ArrayList<Player>) {
+    internal fun setData(player: ArrayList<PlayerData>) {
 
         this.items = player
         notifyDataSetChanged()

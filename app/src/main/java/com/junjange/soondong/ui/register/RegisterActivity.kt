@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.junjange.soondong.R
 import com.junjange.soondong.data.User
@@ -22,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
     private var userName : String? = null
     private var userStudentId : String? = null
     private var userGender : String? = null
+    private var phoneNumber : String? = null
     private var flag : Boolean = false
     private var googleEmail: String? = null
 
@@ -109,12 +111,24 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
 
+        // 사용자 학번
+        binding.phoneNumberEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+
+                phoneNumber = binding.phoneNumberEditText.text.toString()
+
+
+            }
+        })
+
         // 회원가입 버튼
         binding.nextBtn.setOnClickListener {
             viewModel.signUpRetrofit(User(
                 userName.toString(),
                 userStudentId.toString(),
-                userGender.toString(),
+                phoneNumber.toString(),
                 userId.toString(),
                 userPassword.toString(),
                 userGender.toString()
@@ -124,16 +138,13 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.retrofitSignUpText.value.let {
                 viewModel.retrofitSignUpText.observe(this){
 
-//                    if (it.){
-//                        MyApplication.prefs.setString("memberId", memberId.toString())
-//                        startActivity( Intent(this@SigninActivity, MainActivity::class.java))
-//                        finish()
-//
-//                    }
+                    if (it){
+                        startActivity( Intent(this, SigninActivity::class.java))
+                        finish()
+
+                    }
                 }
             }
-            startActivity( Intent(this@RegisterActivity, SigninActivity::class.java))
-            finish()
 
         }
 

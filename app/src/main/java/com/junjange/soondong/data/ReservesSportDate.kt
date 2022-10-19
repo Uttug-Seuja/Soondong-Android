@@ -2,7 +2,7 @@ package com.junjange.soondong.data
 
 import com.google.gson.annotations.SerializedName
 
-data class ReservesSportDate(@SerializedName("data") val reservesSportDateData: List<ReservesSportDateData>)
+data class ReservesSportDate(@SerializedName("data") val reservesSportDateData: ArrayList<ReservesSportDateData>)
 
 data class ReservesSportDateData(
 
@@ -14,6 +14,12 @@ data class ReservesSportDateData(
     @SerializedName("explanation") val explanation: String,
     @SerializedName("currentNum") val currentNum: Int,
     @SerializedName("recruitmentNum") val recruitmentNum: Int,
+    @SerializedName("gender") val gender: String,
+    @SerializedName("reserveId") val reserveId: Int,
+    @SerializedName("reserveStatus") val reserveStatus: String,
+
+
+
 
 
     )

@@ -180,6 +180,36 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phone_number_edit_text_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:visibility="visible"
+                    android:ems="10"
+                    android:maxLength="6"
+                    android:textColorHint="#979797"
+                    android:textSize="18sp"
+                    app:boxStrokeColor="@color/drawer_background"
+                    app:endIconMode="clear_text"
+                    app:hintTextColor="#979797">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phone_number_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:maxLength="11"
+                        android:hint="전화번호"
+                        android:inputType="number"
+                        android:letterSpacing="0"
+                        android:lineSpacingExtra="-12sp"
+                        android:textSize="18sp"
+                        android:textStyle="normal"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:layout_editor_absoluteY="522dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <LinearLayout

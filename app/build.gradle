@@ -4,6 +4,11 @@ plugins {
 }
 apply plugin : 'kotlin-kapt'
 
+
+// local.properties 사용을 위함
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 32
 
@@ -15,6 +20,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        // url 변수 지정
+        buildConfigField "String", "BASE_URL", properties['url.base']
+
     }
 
     buildTypes {

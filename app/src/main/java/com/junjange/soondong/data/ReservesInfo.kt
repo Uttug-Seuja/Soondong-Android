@@ -17,5 +17,6 @@ data class ReservesInfoData(
     @SerializedName("recruitmentNum") val recruitmentNum: Int,
     @SerializedName("place") val place: String,
     @SerializedName("gender") val gender: String,
+    @SerializedName("reserveStatus") val reserveStatus: String,
 
     )

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.junjange.soondong.data.Participation
-import com.junjange.soondong.data.Player1
+import com.junjange.soondong.data.Player
 import com.junjange.soondong.data.ReservesEdit
 import com.junjange.soondong.data.ReservesInfo
 import com.junjange.soondong.repository.MatchingDetailRepository
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class MatchingDetailViewModel(private val repository: MatchingDetailRepository) : ViewModel(){
     private val _retrofitReservesInfoText = MutableLiveData<ReservesInfo>()
-    private val _retrofitParticipantUserInfoText = MutableLiveData<Player1>()
+    private val _retrofitParticipantUserInfoText = MutableLiveData<Player>()
     private val _retrofitDeleteReservesText = MutableLiveData<JsonObject>()
     private val _retrofitPostParticipationText = MutableLiveData<JsonObject>()
     private val _retrofitDeleteParticipationText = MutableLiveData<JsonObject>()
@@ -24,7 +24,7 @@ class MatchingDetailViewModel(private val repository: MatchingDetailRepository) 
     val retrofitReservesInfoText: MutableLiveData<ReservesInfo>
         get() = _retrofitReservesInfoText
 
-    val retrofitParticipantUserInfoText: MutableLiveData<Player1>
+    val retrofitParticipantUserInfoText: MutableLiveData<Player>
         get() = _retrofitParticipantUserInfoText
 
     val retrofitDeleteReservesText: MutableLiveData<JsonObject>

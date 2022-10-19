@@ -22,7 +22,7 @@ class MatchingTodayRepository(application : Application) {
 
     // Use Retrofit
     suspend fun retrofitReservesSportToday(today: String): ReservesSportDate {
-        val response = SoonDongObject.getRetrofitService.getReservesSportToday(today)
+        val response = SoonDongObject.getRetrofitService.getReservesSportToday("2000-01-03")
 
         Log.d("tttresponse.body()", response.body().toString())
         Log.d("tttresponse", response.toString())
