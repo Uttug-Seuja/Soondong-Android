@@ -14,20 +14,13 @@ import com.junjange.soondong.repository.MatchingTodayRepository
 import kotlinx.coroutines.launch
 
 class MatchingEditViewModel(private val repository: MatchingEditRepository) : ViewModel(){
-    private val _retrofitReservesEditText = MutableLiveData<JsonObject>()
-    private val _reservesCreationRetrofit = MutableLiveData<JsonObject>()
+    private val _reservesCreationRetrofit = MutableLiveData<Boolean>()
 
 
-    val retrofitReservesEditText: MutableLiveData<JsonObject>
-        get() = _retrofitReservesEditText
 
-    val reservesCreationRetrofit: MutableLiveData<JsonObject>
+    val reservesCreationRetrofit: MutableLiveData<Boolean>
         get() = _reservesCreationRetrofit
 
-    fun reservesEditRetrofit(reservesEdit: ReservesEdit) = viewModelScope.launch{
-        _retrofitReservesEditText.value = repository.retrofitReservesEdit(reservesEdit)
-
-    }
 
     fun reservesCreationRetrofit(reservesCreation: ReservesCreation) = viewModelScope.launch{
         _reservesCreationRetrofit.value = repository.retrofitReservesCreation(reservesCreation)

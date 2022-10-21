@@ -129,12 +129,12 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
             }
             R.id.todayMatchDrawer-> {
-//                startActivity( Intent(this@HomeActivity, HotPollsActivity::class.java))
+                startActivity( Intent(this@MainActivity, MatchingTodayActivity::class.java))
 
             }
 
             R.id.newMatchDrawer-> {
-//                startActivity(Intent(this@HomeActivity, NewPollActivity::class.java))
+                startActivity( Intent(this@MainActivity, MatchingEditActivity::class.java))
 
             }
             R.id.searchDrawer-> {

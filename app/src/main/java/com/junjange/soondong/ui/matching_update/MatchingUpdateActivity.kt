@@ -1,45 +1,36 @@
-package com.junjange.soondong.ui.matching_edit
+package com.junjange.soondong.ui.matching_update
 
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.SnapHelper
 import com.junjange.soondong.R
-import com.junjange.soondong.adapter.CalendarAdapter
-import com.junjange.soondong.data.CalendarDateModel
 import com.junjange.soondong.data.ReservesCreation
-import com.junjange.soondong.databinding.ActivityMatchingEditBinding
-import com.junjange.soondong.ui.main.MainActivity
-import com.junjange.soondong.ui.matching_detail.MatchingDetailViewModel
-import com.junjange.soondong.ui.signin.SigninActivity
-import com.junjange.soondong.utils.HorizontalItemDecoration
+import com.junjange.soondong.data.ReservesEdit
+import com.junjange.soondong.databinding.ActivityMatchingUpdateBinding
+import com.junjange.soondong.ui.matching.MatchingActivity
+import com.junjange.soondong.ui.matching_detail.MatchingDetailActivity
+import com.junjange.soondong.ui.matching_edit.GenderActivity
+import com.junjange.soondong.ui.matching_edit.MatchingEditViewModel
+import com.junjange.soondong.ui.matching_edit.SportsActivity
 import com.junjange.soondong.utils.MyApplication
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
-class MatchingEditActivity : AppCompatActivity(){
+class MatchingUpdateActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityMatchingEditBinding.inflate(layoutInflater) }
-    private val viewModel by lazy { ViewModelProvider(this, MatchingEditViewModel.Factory(application))[MatchingEditViewModel::class.java] }
+    private val binding by lazy { ActivityMatchingUpdateBinding.inflate(layoutInflater) }
+    private val viewModel by lazy { ViewModelProvider(this, MatchingUpdateViewModel.Factory(application))[MatchingUpdateViewModel::class.java] }
 
     private var title : String? = null
     private var sports : String? = null
@@ -62,6 +53,11 @@ class MatchingEditActivity : AppCompatActivity(){
     var historyCreatedAt: String? = null  // historyDate + historyTime
     var historyDate: String? = null
     var historyTime: String? = null
+    private var reserveId : String? = null
+    private var reserveUserId : Int? = null
+    private var userId : String? = null
+    private var sportType : String? = null
+
 
     // Date, Time Picker 기본 값으로 사용될 현재 날짜 및 시각 가져옴
     private val calendarInstance = Calendar.getInstance()
@@ -82,16 +78,8 @@ class MatchingEditActivity : AppCompatActivity(){
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
-        title = MyApplication.prefs.getString("title", "")
-        sports = MyApplication.prefs.getString("sports", "종목 선택")
-        place = MyApplication.prefs.getString("place", "")
-        recruit = MyApplication.prefs.getString("recruit", "")
-        gender = MyApplication.prefs.getString("gender", "모집 성별")
-        matchingDate = MyApplication.prefs.getString("matchingDate", "매칭 날짜")
-        matchingStartTime = MyApplication.prefs.getString("matchingStartTime", "매칭 시작시간")
-        matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "매칭 종료시간")
-        content = MyApplication.prefs.getString("content", "")
-        member = MyApplication.prefs.getString("memberId", "-1").toInt()
+        reserveId = intent.getIntExtra("reserveId", 0).toString()
+        reserveUserId = intent.getIntExtra("userId", 0)
 
 
         binding.editHistoryTitle.setText(title)
@@ -320,48 +308,55 @@ class MatchingEditActivity : AppCompatActivity(){
     private fun matchCrateClickListener() {
 
         // 작성 완료 및 업로드 버튼 눌렀을 때 진입
-            if (binding.editHistoryTitle.text.isEmpty() || binding.editHistoryPlace.text.isEmpty() || binding.editHistoryDate.text == "매칭 날짜") {
-                if (binding.editHistoryTitle.text.isEmpty()) binding.editHistoryTitle.error = "제목은 필수입력 항목입니다."
-                if (binding.editHistoryPlace.text.isEmpty()) binding.editHistoryPlace.error = "장소명은 필수입력 항목입니다."
-                if (binding.editHistoryDate.text == "매칭 날짜") {
-                    Toast.makeText(this, "날짜를 입력해주세요", Toast.LENGTH_LONG).show()
-                }
+        if (binding.editHistoryTitle.text.isEmpty() || binding.editHistoryPlace.text.isEmpty() || binding.editHistoryDate.text == "매칭 날짜") {
+            if (binding.editHistoryTitle.text.isEmpty()) binding.editHistoryTitle.error = "제목은 필수입력 항목입니다."
+            if (binding.editHistoryPlace.text.isEmpty()) binding.editHistoryPlace.error = "장소명은 필수입력 항목입니다."
+            if (binding.editHistoryDate.text == "매칭 날짜") {
+                Toast.makeText(this, "날짜를 입력해주세요", Toast.LENGTH_LONG).show()
+            }
 
-            } else {
-                matchingStartTime = MyApplication.prefs.getString("matchingStartTime", "")
-                matchingStartTime = matchingStartTime!!.replace("시 ", ":").replace("분", ":00")
-                matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "")
-                matchingEndTime = matchingEndTime!!.replace("시 ", ":").replace("분", ":00")
+        } else {
+            matchingStartTime = MyApplication.prefs.getString("matchingStartTime", "")
+            matchingStartTime = matchingStartTime!!.replace("시 ", ":").replace("분", ":00")
+            matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "")
+            matchingEndTime = matchingEndTime!!.replace("시 ", ":").replace("분", ":00")
 
 
 
-                viewModel.reservesCreationRetrofit(ReservesCreation(
-                    member!!.toInt(),
-                    title.toString(),
-                    content.toString(),
-                    recruit!!.toInt(),
-                    sportsMap[sports].toString(),
-                    matchingStartTime.toString() ,
-                    matchingEndTime.toString(),
-                    matchingDate.toString(),
-                    place.toString(),
-                    genderMap[gender].toString()
-                ))
+            viewModel.reservesEditRetrofit(ReservesEdit(
+                member!!.toInt(),
+                title.toString(),
+                content.toString(),
+//                recruit!!.toInt(),
+                sportsMap[sports].toString(),
+                matchingStartTime.toString() ,
+                matchingEndTime.toString(),
+                matchingDate.toString(),
+                place.toString(),
+//                genderMap[gender].toString()
+            ))
 
-                viewModel.reservesCreationRetrofit.observe(this){
-                    viewModel.reservesCreationRetrofit.value.let {
-                        if (it == true){
-                            finish()
+            viewModel.retrofitReservesEditText.observe(this){
+                viewModel.retrofitReservesEditText.value.let {
+                    if (it == true){
+                        val intent = Intent(this@MatchingUpdateActivity, MatchingDetailActivity::class.java)
+                        intent.apply {
+                            this.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         }
+                        intent.putExtra("reserveId", reserveId)
+                        intent.putExtra("userId", userId)
+                        startActivity(intent)
+                        finish()
                     }
                 }
-
-
-
-
-
-
             }
+
+
+
+
+
+
+        }
 
     }
 }

@@ -10,25 +10,18 @@
         android:name=".utils.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:networkSecurityConfig="@xml/network_security_config"
-
-
-
-
-
-
-
-
-
-
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/togetherness"
         android:label="오순도순"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/togetherness"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soondong"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".MatchUpdateActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.matching_today.MatchingTodayActivity"
             android:exported="false" />

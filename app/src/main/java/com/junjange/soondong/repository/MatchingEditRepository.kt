@@ -6,6 +6,7 @@ import com.google.gson.JsonObject
 import com.junjange.soondong.data.ReservesCreation
 import com.junjange.soondong.data.ReservesEdit
 import com.junjange.soondong.data.ReservesSportDate
+import com.junjange.soondong.data.User
 import com.junjange.soondong.network.SoonDongObject
 
 class MatchingEditRepository (application : Application) {
@@ -22,28 +23,30 @@ class MatchingEditRepository (application : Application) {
     }
 
     // Use Retrofit
-    suspend fun retrofitReservesEdit(reservesEdit: ReservesEdit): JsonObject {
+    suspend fun retrofitReservesEdit(reservesEdit: ReservesEdit): Boolean {
         val response = SoonDongObject.getRetrofitService.postReservesEdit(reservesEdit)
 
         Log.d("tttresponse.body()", response.body().toString())
         Log.d("tttresponse", response.toString())
 
 
-        return if (response.isSuccessful) response.body() as JsonObject else JsonObject()
+        return response.isSuccessful
 
     }
 
     // Use Retrofit
-    suspend fun retrofitReservesCreation(reservesCreation: ReservesCreation): JsonObject {
+    suspend fun retrofitReservesCreation(reservesCreation: ReservesCreation): Boolean {
         val response = SoonDongObject.getRetrofitService.postReservesCreation(reservesCreation)
 
         Log.d("tttresponse.body()", response.body().toString())
         Log.d("tttresponse", response.toString())
 
 
-        return if (response.isSuccessful) response.body() as JsonObject else JsonObject()
+        return response.isSuccessful
 
     }
+
+
 
 
 

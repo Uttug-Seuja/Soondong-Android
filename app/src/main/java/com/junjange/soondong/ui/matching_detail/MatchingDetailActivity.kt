@@ -23,6 +23,7 @@ import com.junjange.soondong.databinding.ActivityMatchingDetailBinding
 import com.junjange.soondong.ui.main.MainActivity
 import com.junjange.soondong.ui.matching.MatchingActivity
 import com.junjange.soondong.ui.matching.MatchingViewModel
+import com.junjange.soondong.ui.matching_update.MatchingUpdateActivity
 import com.junjange.soondong.utils.Constants
 import com.junjange.soondong.utils.MyApplication
 import java.text.SimpleDateFormat
@@ -100,19 +101,39 @@ class MatchingDetailActivity : AppCompatActivity()  {
 
         bottomSheetView.findViewById<View>(R.id.delete_btn).setOnClickListener {
             viewModel.deleteReservesRetrofit(reserveId!!.toInt())
-            bottomSheetDialog!!.dismiss()
-            val intent = Intent(this@MatchingDetailActivity, MatchingActivity::class.java)
-            intent.apply {
-                this.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+            viewModel.retrofitDeleteReservesText.observe(this){
+                viewModel.retrofitDeleteReservesText.value.let {
+                    if (it == true){
+                        bottomSheetDialog!!.dismiss()
+                        val intent = Intent(this@MatchingDetailActivity, MatchingActivity::class.java)
+                        intent.apply {
+                            this.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        }
+                        intent.putExtra("sportsType", sportType)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                }
             }
-            intent.putExtra("sportsType", sportType)
-            startActivity(intent)
-            finish()
+
+
         }
+
+
+        bottomSheetView.findViewById<View>(R.id.match_update_btn).setOnClickListener {
+            val intent = Intent(this@MatchingDetailActivity, MatchingUpdateActivity::class.java)
+            intent.putExtra("reserveId", reserveId)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
+        }
+
 
         bottomSheetView.findViewById<View>(R.id.cancel_btn).setOnClickListener {
             bottomSheetDialog!!.dismiss()
         }
+
 
 
     }
@@ -218,44 +239,5 @@ class MatchingDetailActivity : AppCompatActivity()  {
         }
         return super.onOptionsItemSelected(item)
     }
-//
-//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        binding.mainDrawerLayout.closeDrawers()
-//        when(item.itemId){
-////            R.id.mainPageDrawer-> {
-////                startActivity( Intent(this@MainActivity, MainActivity::class.java))
-////
-////            }
-//            R.id.allPollsDrawer-> {
-////                startActivity( Intent(this@HomeActivity, PollsActivity::class.java))
-//
-//            }
-//            R.id.hotPollsDrawer-> {
-////                startActivity( Intent(this@HomeActivity, HotPollsActivity::class.java))
-//
-//            }
-//            R.id.searchDrawer-> {
-////                startActivity( Intent(this@HomeActivity, SearchActivity::class.java))
-//
-//            }
-//            R.id.myPageDrawer-> {
-//                // My Page 이동
-////                startActivity(Intent(this@HomeActivity, MyPageActivity::class.java))
-//
-//            }
-//
-//            R.id.newPollDrawer-> {
-//                // My Page 이동
-////                startActivity(Intent(this@HomeActivity, NewPollActivity::class.java))
-//
-//            }
-//
-//            R.id.logoutDrawer-> {
-//                // 로그아웃
-//
-//            }
-//
-//        }
-//        return false
-//    }
+
 }

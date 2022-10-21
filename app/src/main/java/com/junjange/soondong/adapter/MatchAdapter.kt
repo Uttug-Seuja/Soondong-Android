@@ -79,7 +79,6 @@ class MatchAdapter (val onClickListener: ItemClickListener, val context: Context
                 Intent(context, MatchingDetailActivity::class.java).apply {
                     // 데이터 전달
                     putExtra("reserveId", reservesSportDateData.reserveId)
-                    Log.d("ttt", reservesSportDateData.userId.toString())
                     putExtra("userId", reservesSportDateData.userId)
 
                 }.run {

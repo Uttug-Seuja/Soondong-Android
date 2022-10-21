@@ -43,10 +43,10 @@ class MatchingDetailRepository (application : Application) {
     }
 
     // 경기 삭제
-    suspend fun retrofitDeleteReserves(reserveId: Int): JsonObject {
+    suspend fun retrofitDeleteReserves(reserveId: Int): Boolean {
         val response = SoonDongObject.getRetrofitService.deleteReserves(reserveId)
 
-        return response.body() as JsonObject
+        return response.isSuccessful
     }
 
     // 경기 참여

@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 class MatchingDetailViewModel(private val repository: MatchingDetailRepository) : ViewModel(){
     private val _retrofitReservesInfoText = MutableLiveData<ReservesInfo>()
     private val _retrofitParticipantUserInfoText = MutableLiveData<Player>()
-    private val _retrofitDeleteReservesText = MutableLiveData<JsonObject>()
+    private val _retrofitDeleteReservesText = MutableLiveData<Boolean>()
     private val _retrofitPostParticipationText = MutableLiveData<JsonObject>()
     private val _retrofitDeleteParticipationText = MutableLiveData<JsonObject>()
 
@@ -27,15 +27,8 @@ class MatchingDetailViewModel(private val repository: MatchingDetailRepository) 
     val retrofitParticipantUserInfoText: MutableLiveData<Player>
         get() = _retrofitParticipantUserInfoText
 
-    val retrofitDeleteReservesText: MutableLiveData<JsonObject>
+    val retrofitDeleteReservesText: MutableLiveData<Boolean>
         get() = _retrofitDeleteReservesText
-
-    val retrofitPostParticipationText: MutableLiveData<JsonObject>
-        get() = _retrofitPostParticipationText
-
-    val retrofitDeleteParticipationText: MutableLiveData<JsonObject>
-        get() = _retrofitDeleteParticipationText
-
 
     // 경기 정보
     fun reservesInfoRetrofit(reserveId: Int) = viewModelScope.launch{
@@ -45,7 +38,7 @@ class MatchingDetailViewModel(private val repository: MatchingDetailRepository) 
 
     // 경기를 참여하는 사용자 정보들
     fun participantUserInfoRetrofit(reserveId: Int) = viewModelScope.launch{
-        _retrofitParticipantUserInfoText.value = repository.retrofitParticipantUserInfo(reserveId)
+//        _retrofitParticipantUserInfoText.value = repository.retrofitParticipantUserInfo(reserveId)
 
     }
 

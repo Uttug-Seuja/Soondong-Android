@@ -1,6 +1,7 @@
 package com.junjange.soondong.utils
 
 import com.junjange.soondong.BuildConfig
+import com.junjange.soondong.utils.API.BASE_URL
 
 object API {
     const val BASE_URL : String = BuildConfig.BASE_URL // 서버 주소
@@ -23,6 +24,4 @@ object API {
     const val GET_RESERVES_SPORT_TODAY : String = "/reserves/get/today-sport"
     const val GET_RESERVES_Info : String = "/reserves/{reserveId}/reserve-info"
 
-
-//    http://localhost:8080/reserves/get/sports-date?sport=SOCCER&day=2000-01-03
 }
