@@ -38,7 +38,7 @@ class MatchingDetailViewModel(private val repository: MatchingDetailRepository) 
 
     // 경기를 참여하는 사용자 정보들
     fun participantUserInfoRetrofit(reserveId: Int) = viewModelScope.launch{
-//        _retrofitParticipantUserInfoText.value = repository.retrofitParticipantUserInfo(reserveId)
+        _retrofitParticipantUserInfoText.value = repository.retrofitParticipantUserInfo(reserveId)
 
     }
 

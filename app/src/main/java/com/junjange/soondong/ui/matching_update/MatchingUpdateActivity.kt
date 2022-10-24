@@ -43,7 +43,7 @@ class MatchingUpdateActivity : AppCompatActivity() {
     private var content : String? = null
     private var member : Int? = null
     private val genderMap = hashMapOf<String, String>("남녀 모두" to "ALL", "남자만" to "MAN", "여자만" to "WOMAN" )
-    private val sportsMap = hashMapOf<String, String>("축구" to "SOCCER", "풋살" to "FUTSAL", "런닝" to "RUNNING", "농구" to "BASKETBALL" )
+    private val sportsMap = hashMapOf<String, String>("SOCCER" to "축구", "FUTSAL" to "풋살", "RUNNING" to "런닝", "BASKETBALL" to "농구" )
 
     var historyTitle: String? = null
     var historyMood: String? = null
@@ -80,16 +80,21 @@ class MatchingUpdateActivity : AppCompatActivity() {
 
         reserveId = intent.getIntExtra("reserveId", 0).toString()
         reserveUserId = intent.getIntExtra("userId", 0)
+        recruit = intent.getStringExtra("recruit").toString()
+        gender = intent.getStringExtra("gender").toString()
+        sports = intent.getStringExtra("sports").toString()
+
+        Log.d("ttt", reserveId.toString())
 
 
         binding.editHistoryTitle.setText(title)
-        binding.sportsText.text = sports
+        binding.sportsText.text = sportsMap[sports]
         binding.editHistoryPlace.setText(place)
         binding.editHistoryRecruit.setText(recruit)
         binding.genderText.text = gender
-        binding.editHistoryDate.text = matchingDate
-        binding.editHistoryStartTime.text = matchingStartTime
-        binding.editHistoryEndTime.text = matchingEndTime
+//        binding.editHistoryDate.text = matchingDate
+//        binding.editHistoryStartTime.text = matchingStartTime
+//        binding.editHistoryEndTime.text = matchingEndTime
         binding.editHistoryContent.setText(content)
 
 
@@ -190,15 +195,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
     private fun setOnClickListener(){
 
 
-
-        binding.sportsSelectBtn.setOnClickListener {
-            startActivity( Intent(this, SportsActivity::class.java))
-        }
-
-        binding.genderSelectBtn.setOnClickListener {
-            startActivity( Intent(this, GenderActivity::class.java))
-        }
-
         // 히스토리 날짜 입력
         binding.editHistoryDateBtn.setOnClickListener {
             val datePicker = DatePickerDialog(
@@ -216,7 +212,7 @@ class MatchingUpdateActivity : AppCompatActivity() {
                         else "$dayOfMonth"
 
                     binding.editHistoryDate.text = historyDate
-                    MyApplication.prefs.setString("matchingDate", historyDate.toString())
+                    matchingDate = historyDate
 
 
                     historyDate += "T"
@@ -242,7 +238,7 @@ class MatchingUpdateActivity : AppCompatActivity() {
                     Log.d("ttt", minute.toString())
 
                     binding.editHistoryStartTime.text =historyTime.toString()
-                    MyApplication.prefs.setString("matchingStartTime", historyTime.toString())
+                    matchingEndTime = historyTime.toString()
 
                 }, hour, minute, false
             )
@@ -279,7 +275,7 @@ class MatchingUpdateActivity : AppCompatActivity() {
                         else " ${minute}분"
 
                     binding.editHistoryEndTime.text = historyTime.toString()
-                    MyApplication.prefs.setString("matchingEndTime", historyTime.toString())
+                    matchingStartTime = historyTime.toString()
 
                 }, hour, minute, false
             )
@@ -316,19 +312,18 @@ class MatchingUpdateActivity : AppCompatActivity() {
             }
 
         } else {
-            matchingStartTime = MyApplication.prefs.getString("matchingStartTime", "")
+
             matchingStartTime = matchingStartTime!!.replace("시 ", ":").replace("분", ":00")
-            matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "")
             matchingEndTime = matchingEndTime!!.replace("시 ", ":").replace("분", ":00")
 
 
 
             viewModel.reservesEditRetrofit(ReservesEdit(
-                member!!.toInt(),
+                reserveId!!.toInt(),
                 title.toString(),
                 content.toString(),
 //                recruit!!.toInt(),
-                sportsMap[sports].toString(),
+                sports.toString(),
                 matchingStartTime.toString() ,
                 matchingEndTime.toString(),
                 matchingDate.toString(),

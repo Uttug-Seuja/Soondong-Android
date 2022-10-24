@@ -40,6 +40,9 @@ class MatchingDetailActivity : AppCompatActivity()  {
     private var reserveUserId : Int? = null
     private var userId : String? = null
     private var sportType : String? = null
+    private var recruit : String? = null
+    private var genderText : String? = null
+
 
     private val gender = hashMapOf<String, String>("ALL" to "남녀모두", "MAN" to "남자만", "WOMAN" to "여자만" )
     private val ruleMember = hashMapOf<String, String>("SOCCER" to "11vs11", "FUTSAL" to "6vs6", "RUNNING" to "최대인원", "BASKETBALL" to "8vs8")
@@ -122,10 +125,17 @@ class MatchingDetailActivity : AppCompatActivity()  {
         }
 
 
-        bottomSheetView.findViewById<View>(R.id.match_update_btn).setOnClickListener {
+        bottomSheetView.findViewById<View>(R.id.mainToolbar).setOnClickListener {
+            bottomSheetDialog!!.dismiss()
+
             val intent = Intent(this@MatchingDetailActivity, MatchingUpdateActivity::class.java)
-            intent.putExtra("reserveId", reserveId)
+            intent.putExtra("reserveId", reserveId!!.toInt())
             intent.putExtra("userId", userId)
+            intent.putExtra("recruit", recruit)
+            intent.putExtra("gender", binding.matchGenderText.text)
+            intent.putExtra("sports", sportType)
+
+
             startActivity(intent)
         }
 
@@ -158,6 +168,7 @@ class MatchingDetailActivity : AppCompatActivity()  {
                 binding.matchGenderText.text = gender[it.reservesInfoData.gender]
 //                binding.matchRuleText.text = ruleMember[it.reservesInfoData.sport]
                 binding.matchRecruitmentNumText.text = "현재 ${it.reservesInfoData.currentNum}/${it.reservesInfoData.recruitmentNum}명"
+                recruit = it.reservesInfoData.recruitmentNum.toString()
                 binding.matchShoesText.text = shoes[it.reservesInfoData.sport]
                 binding.applyBtn.setCardBackgroundColor(Color.parseColor(stateBtnColor[it.reservesInfoData.reserveStatus]))
                 binding.applyText.text = reserveStatus[it.reservesInfoData.reserveStatus]
@@ -232,6 +243,7 @@ class MatchingDetailActivity : AppCompatActivity()  {
 
             R.id.action_menu -> {
                 bottomSheetDialog!!.show()
+
 
 
                 return super.onOptionsItemSelected(item)

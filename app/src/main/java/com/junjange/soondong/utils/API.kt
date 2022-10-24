@@ -18,7 +18,7 @@ object API {
 
     // reserves
     const val POST_RESERVES_CREATION : String = "/reserves/creation"
-    const val POST_RESERVES_EDIT : String = "/reserves/{reserveId}/edit"
+    const val POST_RESERVES_EDIT : String = "/reserves/edit"
     const val DELETE_RESERVES : String = "/reserves/{reserveId}/delete"
     const val GET_RESERVES_SPORT_DATE : String = "/reserves/get/sports-date"
     const val GET_RESERVES_SPORT_TODAY : String = "/reserves/get/today-sport"
