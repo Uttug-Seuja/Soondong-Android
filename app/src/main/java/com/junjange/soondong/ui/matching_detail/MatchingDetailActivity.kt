@@ -43,7 +43,6 @@ class MatchingDetailActivity : AppCompatActivity()  {
     private var recruit : String? = null
     private var genderText : String? = null
 
-
     private val gender = hashMapOf<String, String>("ALL" to "남녀모두", "MAN" to "남자만", "WOMAN" to "여자만" )
     private val ruleMember = hashMapOf<String, String>("SOCCER" to "11vs11", "FUTSAL" to "6vs6", "RUNNING" to "최대인원", "BASKETBALL" to "8vs8")
     private val shoes = hashMapOf<String, String>("SOCCER" to "풋살화/운동화", "FUTSAL" to "풋살화/운동화", "RUNNING" to "런닝화/운동화", "BASKETBALL" to "농구화/운동화")
@@ -137,11 +136,23 @@ class MatchingDetailActivity : AppCompatActivity()  {
 
     }
 
+
+
     @SuppressLint("SetTextI18n")
     private fun setView(){
         viewModel.reservesInfoRetrofit(reserveId!!.toInt())
         viewModel.retrofitReservesInfoText.observe(this){
             viewModel.retrofitReservesInfoText.value.let {
+
+                when(it!!.reservesInfoData.sport){
+                    "BASKETBALL" -> binding.collapsing.setBackgroundResource(R.drawable.sch_basketball)
+                    "SOCCER" -> binding.collapsing.setBackgroundResource(R.drawable.sch_soccer)
+                    "FUTSAL" -> binding.collapsing.setBackgroundResource(R.drawable.sch_futsal)
+                    "RUNNING" -> binding.collapsing.setBackgroundResource(R.drawable.sch_running)
+
+                }
+
+
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd");
                 val  parseDate = dateFormat.parse(it!!.reservesInfoData.reserveDate )
                 sportType = it.reservesInfoData.sport

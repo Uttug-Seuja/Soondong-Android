@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     app:contentScrim="@color/white"
-                    android:background="@drawable/img"
+                    android:background="@drawable/sch"
                     app:layout_scrollFlags="scroll"
                     >
                     <androidx.appcompat.widget.Toolbar

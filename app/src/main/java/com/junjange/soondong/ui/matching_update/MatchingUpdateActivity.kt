@@ -39,7 +39,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
     private var member : Int? = null
     private val genderMap = hashMapOf<String, String>("남녀 모두" to "ALL", "남자만" to "MAN", "여자만" to "WOMAN" )
     private val genderReadMap = hashMapOf<String, String>("ALL" to "남녀 모두", "MAN" to "남잠나", "WOMAN" to "여자만" )
-    private val sportsMap = hashMapOf<String, String>("축구" to "SOCCER", "풋살" to "FUTSAL", "런닝" to "RUNNING", "농구" to "BASKETBALL" )
     private val sportsReadMap = hashMapOf<String, String>("SOCCER" to "축구", "FUTSAL" to "풋살", "RUNNING" to "런닝", "BASKETBALL" to "농구" )
 
     var historyTitle: String? = null
@@ -84,7 +83,7 @@ class MatchingUpdateActivity : AppCompatActivity() {
         viewModel.retrofitReservesInfoText.observe(this){
             viewModel.retrofitReservesInfoText.value.let {
                 title = it!!.reservesInfoData.title
-                sports = sportsReadMap[it!!.reservesInfoData.sport]
+                sports = it!!.reservesInfoData.sport
                 place = it.reservesInfoData.place
                 recruit = it.reservesInfoData.recruitmentNum.toString()
                 gender = genderReadMap[it.reservesInfoData.gender]
@@ -328,7 +327,7 @@ class MatchingUpdateActivity : AppCompatActivity() {
                             this.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         }
                         intent.putExtra("reserveId", reserveId)
-                        intent.putExtra("userId", userId)
+                        intent.putExtra("userId", reserveUserId)
                         startActivity(intent)
                         finish()
                     }

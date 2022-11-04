@@ -48,13 +48,30 @@
 
             </androidx.appcompat.widget.Toolbar>
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:layout_marginTop="1dp"
+                android:backgroundTint="@color/white"
+                android:clipToPadding="true"
+                app:cardCornerRadius="15sp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/sch_today"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
 
 
 
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/margin_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
