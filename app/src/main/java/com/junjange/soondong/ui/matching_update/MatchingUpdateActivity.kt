@@ -16,14 +16,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.junjange.soondong.R
-import com.junjange.soondong.data.ReservesCreation
 import com.junjange.soondong.data.ReservesEdit
 import com.junjange.soondong.databinding.ActivityMatchingUpdateBinding
-import com.junjange.soondong.ui.matching.MatchingActivity
 import com.junjange.soondong.ui.matching_detail.MatchingDetailActivity
-import com.junjange.soondong.ui.matching_edit.GenderActivity
-import com.junjange.soondong.ui.matching_edit.MatchingEditViewModel
-import com.junjange.soondong.ui.matching_edit.SportsActivity
 import com.junjange.soondong.utils.MyApplication
 import java.util.*
 
@@ -43,7 +38,9 @@ class MatchingUpdateActivity : AppCompatActivity() {
     private var content : String? = null
     private var member : Int? = null
     private val genderMap = hashMapOf<String, String>("남녀 모두" to "ALL", "남자만" to "MAN", "여자만" to "WOMAN" )
-    private val sportsMap = hashMapOf<String, String>("SOCCER" to "축구", "FUTSAL" to "풋살", "RUNNING" to "런닝", "BASKETBALL" to "농구" )
+    private val genderReadMap = hashMapOf<String, String>("ALL" to "남녀 모두", "MAN" to "남잠나", "WOMAN" to "여자만" )
+    private val sportsMap = hashMapOf<String, String>("축구" to "SOCCER", "풋살" to "FUTSAL", "런닝" to "RUNNING", "농구" to "BASKETBALL" )
+    private val sportsReadMap = hashMapOf<String, String>("SOCCER" to "축구", "FUTSAL" to "풋살", "RUNNING" to "런닝", "BASKETBALL" to "농구" )
 
     var historyTitle: String? = null
     var historyMood: String? = null
@@ -53,7 +50,7 @@ class MatchingUpdateActivity : AppCompatActivity() {
     var historyCreatedAt: String? = null  // historyDate + historyTime
     var historyDate: String? = null
     var historyTime: String? = null
-    private var reserveId : String? = null
+    private var reserveId : Int? = null
     private var reserveUserId : Int? = null
     private var userId : String? = null
     private var sportType : String? = null
@@ -73,37 +70,44 @@ class MatchingUpdateActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        reserveId = intent.getIntExtra("reserveId", 0)
+        reserveUserId = intent.getIntExtra("userId", 0)
+
         setSupportActionBar(binding.mainToolbar) // 툴바를 액티비티의 앱바로 지정
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
-        reserveId = intent.getIntExtra("reserveId", 0).toString()
-        reserveUserId = intent.getIntExtra("userId", 0)
-        recruit = intent.getStringExtra("recruit").toString()
-        gender = intent.getStringExtra("gender").toString()
-        sports = intent.getStringExtra("sports").toString()
-
-        Log.d("ttt", reserveId.toString())
+        viewModel.reservesInfoRetrofit(reserveId!!)
 
 
-        binding.editHistoryTitle.setText(title)
-        binding.sportsText.text = sportsMap[sports]
-        binding.editHistoryPlace.setText(place)
-        binding.editHistoryRecruit.setText(recruit)
-        binding.genderText.text = gender
-//        binding.editHistoryDate.text = matchingDate
-//        binding.editHistoryStartTime.text = matchingStartTime
-//        binding.editHistoryEndTime.text = matchingEndTime
-        binding.editHistoryContent.setText(content)
+        viewModel.retrofitReservesInfoText.observe(this){
+            viewModel.retrofitReservesInfoText.value.let {
+                title = it!!.reservesInfoData.title
+                sports = sportsReadMap[it!!.reservesInfoData.sport]
+                place = it.reservesInfoData.place
+                recruit = it.reservesInfoData.recruitmentNum.toString()
+                gender = genderReadMap[it.reservesInfoData.gender]
+                matchingDate = it.reservesInfoData.reserveDate
+                matchingStartTime = it.reservesInfoData.startT.replaceFirst(":", "시 ").replaceFirst(":00", "분")
+                matchingEndTime = it.reservesInfoData.endT.replaceFirst(":", "시 ").replaceFirst(":00", "분")
+                content = it.reservesInfoData.explanation
 
+                binding.editHistoryTitle.setText(it!!.reservesInfoData.title)
+                binding.sportsText.text = sportsReadMap[it!!.reservesInfoData.sport]
+                binding.editHistoryPlace.setText(it.reservesInfoData.place)
+                binding.editHistoryRecruit.setText(it.reservesInfoData.recruitmentNum.toString())
+                binding.genderText.text = genderReadMap[it.reservesInfoData.gender]
+                binding.editHistoryDate.text = it.reservesInfoData.reserveDate
+                binding.editHistoryStartTime.text = it.reservesInfoData.startT.replaceFirst(":", "시 ").replaceFirst(":00", "분")
+                binding.editHistoryEndTime.text = it.reservesInfoData.endT.replaceFirst(":", "시 ").replaceFirst(":00", "분")
+                binding.editHistoryContent.setText(it.reservesInfoData.explanation)
 
-        historyDate = matchingDate
+            }
+
+        }
         addTextChangedListener()
         setOnClickListener()
-
-
-
 
     }
 
@@ -143,7 +147,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
             override fun afterTextChanged(editable: Editable) {
 
                 title = binding.editHistoryTitle.text.toString()
-                MyApplication.prefs.setString("title", title.toString())
 
 
             }
@@ -156,7 +159,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
             override fun afterTextChanged(editable: Editable) {
 
                 place = binding.editHistoryPlace.text.toString()
-                MyApplication.prefs.setString("place", place.toString())
 
 
             }
@@ -168,7 +170,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
             override fun afterTextChanged(editable: Editable) {
 
                 recruit = binding.editHistoryRecruit.text.toString()
-                MyApplication.prefs.setString("recruit", recruit.toString())
 
 
             }
@@ -180,8 +181,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
             override fun afterTextChanged(editable: Editable) {
 
                 content = binding.editHistoryContent.text.toString()
-                MyApplication.prefs.setString("content", content.toString())
-
 
             }
         })
@@ -215,7 +214,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
                     matchingDate = historyDate
 
 
-                    historyDate += "T"
                 }, year, month, day
             )
             datePicker.show()
@@ -233,9 +231,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
                     historyTime +=
                         if (minute < 10) " 0${minute}분"
                         else " ${minute}분"
-                    Log.d("ttt", historyTime.toString())
-                    Log.d("ttt", hourOfDay.toString())
-                    Log.d("ttt", minute.toString())
 
                     binding.editHistoryStartTime.text =historyTime.toString()
                     matchingEndTime = historyTime.toString()
@@ -295,10 +290,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
             timePicker.getButton(Dialog.BUTTON_POSITIVE)
                 .setTextColor(Color.parseColor("#293263"))
         }
-
-
-
-
     }
 
     private fun matchCrateClickListener() {
@@ -315,8 +306,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
 
             matchingStartTime = matchingStartTime!!.replace("시 ", ":").replace("분", ":00")
             matchingEndTime = matchingEndTime!!.replace("시 ", ":").replace("분", ":00")
-
-
 
             viewModel.reservesEditRetrofit(ReservesEdit(
                 reserveId!!.toInt(),
@@ -345,12 +334,6 @@ class MatchingUpdateActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
-
-
-
-
         }
 
     }

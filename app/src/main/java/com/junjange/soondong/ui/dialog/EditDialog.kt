@@ -23,24 +23,14 @@ class EditDialog : AppCompatActivity() {
         binding.dialog = this
         binding.lifecycleOwner = this
 
-
-
         setSupportActionBar(binding.mainToolbar) // 툴바를 액티비티의 앱바로 지정
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
-
-
         binding.startBtn.setOnClickListener {
-
-
             startActivity(Intent(this, MatchingEditActivity::class.java))
             finish()
-
-
         }
 
         binding.stopBtn.setOnClickListener {
-
-
             MyApplication.prefs.setString("title", "")
             MyApplication.prefs.setString("sports", "종목 선택")
             MyApplication.prefs.setString("place", "")
@@ -51,18 +41,9 @@ class EditDialog : AppCompatActivity() {
             MyApplication.prefs.setString("matchingEndTime", "매칭 종료시간")
             MyApplication.prefs.setString("content", "")
 
-
             startActivity(Intent(this, MatchingEditActivity::class.java))
             finish()
-
-
-
         }
-
-
-
-
-
     }
 
     @SuppressLint("QueryPermissionsNeeded")

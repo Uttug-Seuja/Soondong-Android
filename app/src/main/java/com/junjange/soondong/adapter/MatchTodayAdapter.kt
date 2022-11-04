@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,6 @@ class MatchTodayAdapter(val onClickListener: ItemClickListener, val context: Con
     private val stateTextColor = hashMapOf<String, String>("POSSIBLE" to "#FFFFFF" , "IMMINENT" to "#FFFFFF",  "DEADLINE" to "#cccccc" )
     private val stateBtnColor = hashMapOf<String, String>("POSSIBLE" to "#1570ff" , "IMMINENT" to "#FF4D37",  "DEADLINE" to "#EEEEEE" )
 
-
     interface ItemClickListener {
         fun onItemClickListener(
             item: Match,
@@ -35,18 +35,13 @@ class MatchTodayAdapter(val onClickListener: ItemClickListener, val context: Con
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRecylcerMatchTodayBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
         holder.bind(items[position])
         holder.clickItem(items[position])
     }
-
-
 
     inner class ViewHolder(private val binding: ItemRecylcerMatchTodayBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -60,8 +55,6 @@ class MatchTodayAdapter(val onClickListener: ItemClickListener, val context: Con
             binding.stateBtn.setCardBackgroundColor(Color.parseColor(stateBtnColor[reservesSportDateData.reserveStatus]))
             binding.stateText.text = reserveStatus[reservesSportDateData.reserveStatus]
             binding.stateText.setTextColor(Color.parseColor(stateTextColor[reservesSportDateData.reserveStatus]))
-
-
         }
 
         fun clickItem(reservesSportDateData: ReservesSportDateData){
@@ -78,9 +71,7 @@ class MatchTodayAdapter(val onClickListener: ItemClickListener, val context: Con
                     context.startActivity(this)
                 }
             }
-
         }
-
     }
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -88,20 +79,16 @@ class MatchTodayAdapter(val onClickListener: ItemClickListener, val context: Con
 
     }
 
-
     override fun getItemViewType(position: Int): Int {
         return position
     }
 
-
     override fun getItemCount() : Int = items.size
-
 
     @SuppressLint("NotifyDataSetChanged")
     internal fun setData(reservesSportDateData: ArrayList<ReservesSportDateData>) {
 
         this.items = reservesSportDateData
         notifyDataSetChanged()
-
     }
 }

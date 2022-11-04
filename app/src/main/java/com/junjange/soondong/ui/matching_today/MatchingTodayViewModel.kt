@@ -17,16 +17,13 @@ import kotlinx.coroutines.launch
 class MatchingTodayViewModel(private val repository: MatchingTodayRepository) : ViewModel(){
     private val _retrofitReservesSportTodayText = MutableLiveData<ReservesSportDate>()
 
-
     val retrofitReservesSportTodayText: MutableLiveData<ReservesSportDate>
         get() = _retrofitReservesSportTodayText
-
 
     fun reservesSportTodayRetrofit(today: String) = viewModelScope.launch{
         _retrofitReservesSportTodayText.value = repository.retrofitReservesSportToday(today)
 
     }
-
 
     // factory pattern
     class Factory(private val application: Application) : ViewModelProvider.Factory {

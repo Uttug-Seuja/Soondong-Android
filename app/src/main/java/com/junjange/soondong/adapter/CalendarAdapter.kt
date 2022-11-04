@@ -12,7 +12,8 @@ import com.junjange.soondong.databinding.ItemRecyclerDateBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
+class CalendarAdapter(val onClickListener: ItemClickListener) :
+    RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
     private var items = ArrayList<CalendarDateModel>()
     private val cal = Calendar.getInstance(Locale.KOREA)
 
@@ -25,7 +26,8 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemRecyclerDateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemRecyclerDateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
@@ -37,8 +39,8 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
     }
 
 
-
-    inner class ViewHolder(private val binding: ItemRecyclerDateBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemRecyclerDateBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(calendarDateModel: CalendarDateModel) {
 
@@ -68,7 +70,7 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
                 )
             } else {
 
-                when (calendarDateModel.calendarDay){
+                when (calendarDateModel.calendarDay) {
 
                     "토" -> {
                         calendarDay.setTextColor(
@@ -139,18 +141,16 @@ class CalendarAdapter(val onClickListener: ItemClickListener) : RecyclerView.Ada
     }
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
-    fun setItem(item: CalendarDateModel){
+    fun setItem(item: CalendarDateModel) {
 
     }
-
-
 
 
     override fun getItemViewType(position: Int): Int {
         return position
     }
 
-    override fun getItemCount() : Int = items.size
+    override fun getItemCount(): Int = items.size
 
     @SuppressLint("NotifyDataSetChanged")
     internal fun setData(calendarList: ArrayList<CalendarDateModel>) {

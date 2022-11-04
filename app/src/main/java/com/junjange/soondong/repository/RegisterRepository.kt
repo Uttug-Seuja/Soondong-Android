@@ -9,7 +9,6 @@ import com.junjange.soondong.network.SoonDongObject
 
 class RegisterRepository (application : Application) {
 
-
     // singleton pattern
     companion object {
         private var instance: RegisterRepository? = null
@@ -23,19 +22,6 @@ class RegisterRepository (application : Application) {
     // Use Retrofit
     suspend fun retrofitSignUp(user: User): Boolean {
         val response = SoonDongObject.getRetrofitService.postUsersCreation(user)
-
-        Log.d("tttresponse.body()", response.body().toString())
-        Log.d("tttresponse", response.toString())
-
-
-
         return response.isSuccessful
-
     }
-
-
-
-
-
-
 }

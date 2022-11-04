@@ -11,7 +11,6 @@ import com.junjange.soondong.network.SoonDongObject
 
 class MatchingDetailRepository (application : Application) {
 
-
     // singleton pattern
     companion object {
         private var instance: MatchingDetailRepository? = null
@@ -25,44 +24,30 @@ class MatchingDetailRepository (application : Application) {
     // 경기 정보
     suspend fun retrofitReservesInfo(reserveId: Int): ReservesInfo {
         val response = SoonDongObject.getRetrofitService.getReservesInfo(reserveId)
-
-        Log.d("tttresponse.body()", response.body().toString())
-        Log.d("tttresponse", response.toString())
-
-
         return response.body() as ReservesInfo
     }
 
     // 경기를 참여하는 사용자 정보들
     suspend fun retrofitParticipantUserInfo(reserveId: Int): Player {
         val response = SoonDongObject.getRetrofitService.getParticipantUserInfo(reserveId)
-
-        Log.d("ttt", response.body().toString())
-
         return response.body() as Player
     }
 
     // 경기 삭제
     suspend fun retrofitDeleteReserves(reserveId: Int): Boolean {
         val response = SoonDongObject.getRetrofitService.deleteReserves(reserveId)
-
         return response.isSuccessful
     }
 
     // 경기 참여
     suspend fun retrofitPostParticipation(participation: Participation): JsonObject {
         val response = SoonDongObject.getRetrofitService.postParticipation(participation)
-
         return response.body() as JsonObject
     }
 
     // 경기 참여 취소
     suspend fun retrofitDeleteParticipation(participation: Participation): JsonObject {
         val response = SoonDongObject.getRetrofitService.deleteParticipation(participation)
-
         return response.body() as JsonObject
     }
-
-
-
 }

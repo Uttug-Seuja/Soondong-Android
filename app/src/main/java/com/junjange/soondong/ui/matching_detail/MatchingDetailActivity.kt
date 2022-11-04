@@ -65,8 +65,6 @@ class MatchingDetailActivity : AppCompatActivity()  {
         setMatchView()
         setObserver()
 
-
-
         /**
          * drawer
          *
@@ -75,8 +73,6 @@ class MatchingDetailActivity : AppCompatActivity()  {
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_previous) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
-
-
 
         binding.applyBtn.setOnClickListener {
 
@@ -98,6 +94,7 @@ class MatchingDetailActivity : AppCompatActivity()  {
         val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
         bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog!!.setContentView(bottomSheetView)
+
         bottomSheetView.findViewById<View>(R.id.mainToolbar).setOnClickListener {
             bottomSheetDialog!!.dismiss()
         }
@@ -117,24 +114,16 @@ class MatchingDetailActivity : AppCompatActivity()  {
                         startActivity(intent)
                         finish()
                     }
-
                 }
             }
-
-
         }
 
 
         bottomSheetView.findViewById<View>(R.id.mainToolbar).setOnClickListener {
             bottomSheetDialog!!.dismiss()
-
             val intent = Intent(this@MatchingDetailActivity, MatchingUpdateActivity::class.java)
             intent.putExtra("reserveId", reserveId!!.toInt())
-            intent.putExtra("userId", userId)
-            intent.putExtra("recruit", recruit)
-            intent.putExtra("gender", binding.matchGenderText.text)
-            intent.putExtra("sports", sportType)
-
+            intent.putExtra("userId", userId!!.toInt())
 
             startActivity(intent)
         }
@@ -153,10 +142,7 @@ class MatchingDetailActivity : AppCompatActivity()  {
         viewModel.reservesInfoRetrofit(reserveId!!.toInt())
         viewModel.retrofitReservesInfoText.observe(this){
             viewModel.retrofitReservesInfoText.value.let {
-//                android:text="10월 5일 수요일 10:00 ~ 12:00"
-
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd");
-
                 val  parseDate = dateFormat.parse(it!!.reservesInfoData.reserveDate )
                 sportType = it.reservesInfoData.sport
                 binding.matchDayText.text = sdf.format(parseDate) + " " + it.reservesInfoData.startT.substring(0, 5) + " ~ " + it.reservesInfoData.endT.substring(0, 5)
@@ -182,9 +168,7 @@ class MatchingDetailActivity : AppCompatActivity()  {
                 }else if (it.reservesInfoData.reserveStatus == "IMMINENT"){
                     binding.applyExplanationText.text = "진행 확정까지\n${it.reservesInfoData.recruitmentNum - it.reservesInfoData.currentNum}자리 남았어요"
 
-
                 }
-
             }
         }
     }
@@ -197,35 +181,24 @@ class MatchingDetailActivity : AppCompatActivity()  {
     }
 
     private fun setObserver() {
-
-//        val player = Constants.getPlayer()
-//        matchDataAdapter.setData(player)
         viewModel.participantUserInfoRetrofit(reserveId!!.toInt())
         viewModel.retrofitParticipantUserInfoText.observe(this){
             viewModel.retrofitParticipantUserInfoText.value.let {
                 matchDataAdapter.setData(it!!.playerData)
 
-               if(it.playerData.find {
-                       it.userId == userId!!.toInt()
-                   } != null){
+                if(it.playerData.find {
+                        it.userId == userId!!.toInt()
+                    } != null){
 
-                   binding.applyText.text = "취소하기"
-                   binding.applyBtn.setCardBackgroundColor(Color.parseColor("#FF4D37"))
-
-
-               }
+                    binding.applyText.text = "취소하기"
+                    binding.applyBtn.setCardBackgroundColor(Color.parseColor("#FF4D37"))
+                }
             }
         }
-
-
-
     }
 
     //액션버튼 메뉴 액션바에 집어 넣기
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        Log.d("ttt11111111", userId.toString())
-        Log.d("ttt111111112", reserveUserId.toString())
-
         if (userId!!.toInt() == reserveUserId){
 
             menuInflater.inflate(R.menu.toolbar_ham_menu, menu)
@@ -238,7 +211,6 @@ class MatchingDetailActivity : AppCompatActivity()  {
         when(item.itemId){
             android.R.id.home->{ // 메뉴 버튼
                 finish()
-//                binding.mainDrawerLayout.openDrawer(GravityCompat.START)    // 네비게이션 드로어 열기
             }
 
             R.id.action_menu -> {

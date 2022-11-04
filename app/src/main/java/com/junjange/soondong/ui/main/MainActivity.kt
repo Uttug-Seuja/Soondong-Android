@@ -39,9 +39,6 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
         binding.mainNavigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
-
-
-        Log.d("ttt",MyApplication.prefs.getString("memberId", "").toString())
         // 축구 매칭
         binding.footballBtn.setOnClickListener {
             val intent = Intent(this@MainActivity, MatchingActivity::class.java)
@@ -71,17 +68,14 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             startActivity(intent)
         }
 
-
         // 오늘의 경기
         binding.todayMatchBtn.setOnClickListener {
             startActivity( Intent(this@MainActivity, MatchingTodayActivity::class.java))
 
         }
 
-
         // 게시글 작성
         binding.newMatchBtn.setOnClickListener {
-
             val title = MyApplication.prefs.getString("title", "")
             val sports = MyApplication.prefs.getString("sports", "종목 선택")
             val place = MyApplication.prefs.getString("place", "")
@@ -92,19 +86,12 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             val matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "매칭 종료시간")
             val content = MyApplication.prefs.getString("content", "")
 
-
-
             if (title != "" || sports != "종목 선택" || place != "" || recruit != "" ||  gender != "모집 성별" ||
                 matchingDate != "매칭 날짜" || matchingStartTime != "매칭 시작시간" || matchingEndTime != "매칭 종료시간" || content != ""){
-
                 startActivity(Intent(this, EditDialog::class.java))
-
-
             }else{
                 startActivity(Intent(this, MatchingEditActivity::class.java))
-
             }
-
         }
     }
 
@@ -143,10 +130,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             }
 
             R.id.logoutDrawer-> {
-
-
                 // 로그아웃
-
                 MyApplication.prefs.setString("title", "")
                 MyApplication.prefs.setString("sports", "종목 선택")
                 MyApplication.prefs.setString("place", "")

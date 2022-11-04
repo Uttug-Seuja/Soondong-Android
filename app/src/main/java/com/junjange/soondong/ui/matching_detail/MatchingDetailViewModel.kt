@@ -8,10 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.junjange.soondong.data.Participation
 import com.junjange.soondong.data.Player
-import com.junjange.soondong.data.ReservesEdit
 import com.junjange.soondong.data.ReservesInfo
 import com.junjange.soondong.repository.MatchingDetailRepository
-import com.junjange.soondong.repository.MatchingEditRepository
 import kotlinx.coroutines.launch
 
 class MatchingDetailViewModel(private val repository: MatchingDetailRepository) : ViewModel(){
@@ -35,17 +33,14 @@ class MatchingDetailViewModel(private val repository: MatchingDetailRepository) 
         _retrofitReservesInfoText.value = repository.retrofitReservesInfo(reserveId)
 
     }
-
     // 경기를 참여하는 사용자 정보들
     fun participantUserInfoRetrofit(reserveId: Int) = viewModelScope.launch{
         _retrofitParticipantUserInfoText.value = repository.retrofitParticipantUserInfo(reserveId)
 
     }
-
     // 경기 삭제
     fun deleteReservesRetrofit(reserveId: Int) = viewModelScope.launch{
         _retrofitDeleteReservesText.value = repository.retrofitDeleteReserves(reserveId)
-
     }
 
     // 경기 참여
@@ -63,7 +58,6 @@ class MatchingDetailViewModel(private val repository: MatchingDetailRepository) 
         _retrofitParticipantUserInfoText.value = repository.retrofitParticipantUserInfo(participation.reserveId)
 
     }
-
 
     // factory pattern
     class Factory(private val application: Application) : ViewModelProvider.Factory {

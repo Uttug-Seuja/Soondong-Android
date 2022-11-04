@@ -50,8 +50,5 @@ class SportsActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-
-
     }
 }

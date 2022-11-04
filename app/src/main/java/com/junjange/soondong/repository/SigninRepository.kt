@@ -21,22 +21,9 @@ class SigninRepository (application : Application) {
         }
     }
 
-
     // Use Retrofit
     suspend fun retrofitSignIn(login: Login): DataInt {
         val response = SoonDongObject.getRetrofitService.postUsersLogin(login)
-
-        Log.d("ttt", response.toString())
-        Log.d("ttt", response.isSuccessful.toString())
-        Log.d("ttt", response.body().toString())
-        return if (response.isSuccessful) response.body() as DataInt else DataInt(-1)
-
-
+        return if (response.isSuccessful) response.body() as DataInt else DataInt(0)
     }
-
-
-
-
-
-
 }

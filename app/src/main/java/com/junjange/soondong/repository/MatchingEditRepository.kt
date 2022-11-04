@@ -3,14 +3,10 @@ package com.junjange.soondong.repository
 import android.app.Application
 import android.util.Log
 import com.google.gson.JsonObject
-import com.junjange.soondong.data.ReservesCreation
-import com.junjange.soondong.data.ReservesEdit
-import com.junjange.soondong.data.ReservesSportDate
-import com.junjange.soondong.data.User
+import com.junjange.soondong.data.*
 import com.junjange.soondong.network.SoonDongObject
 
 class MatchingEditRepository (application : Application) {
-
 
     // singleton pattern
     companion object {
@@ -25,11 +21,6 @@ class MatchingEditRepository (application : Application) {
     // Use Retrofit
     suspend fun retrofitReservesEdit(reservesEdit: ReservesEdit): Boolean {
         val response = SoonDongObject.getRetrofitService.postReservesEdit(reservesEdit)
-
-        Log.d("tttresponse.body()", response.body().toString())
-        Log.d("tttresponse", response.toString())
-
-
         return response.isSuccessful
 
     }
@@ -37,17 +28,12 @@ class MatchingEditRepository (application : Application) {
     // Use Retrofit
     suspend fun retrofitReservesCreation(reservesCreation: ReservesCreation): Boolean {
         val response = SoonDongObject.getRetrofitService.postReservesCreation(reservesCreation)
-
-        Log.d("tttresponse.body()", response.body().toString())
-        Log.d("tttresponse", response.toString())
-
-
         return response.isSuccessful
-
     }
 
-
-
-
-
+    // 경기 정보
+    suspend fun retrofitReservesInfo(reserveId: Int): ReservesInfo {
+        val response = SoonDongObject.getRetrofitService.getReservesInfo(reserveId)
+        return response.body() as ReservesInfo
+    }
 }

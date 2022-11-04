@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class ReservesSportDate(@SerializedName("data") val reservesSportDateData: ArrayList<ReservesSportDateData>)
 
 data class ReservesSportDateData(
-
     @SerializedName("sport") val sport: String,
     @SerializedName("reserveDate") val reserveDate: String,
     @SerializedName("startT") val startT: String,
@@ -18,11 +17,6 @@ data class ReservesSportDateData(
     @SerializedName("reserveId") val reserveId: Int,
     @SerializedName("reserveStatus") val reserveStatus: String,
     @SerializedName("userId") val userId: Int,
-
-
-
-
-
     )
 
 

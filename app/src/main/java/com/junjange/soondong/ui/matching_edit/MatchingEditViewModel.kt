@@ -16,17 +16,13 @@ import kotlinx.coroutines.launch
 class MatchingEditViewModel(private val repository: MatchingEditRepository) : ViewModel(){
     private val _reservesCreationRetrofit = MutableLiveData<Boolean>()
 
-
-
     val reservesCreationRetrofit: MutableLiveData<Boolean>
         get() = _reservesCreationRetrofit
-
 
     fun reservesCreationRetrofit(reservesCreation: ReservesCreation) = viewModelScope.launch{
         _reservesCreationRetrofit.value = repository.retrofitReservesCreation(reservesCreation)
 
     }
-
 
     // factory pattern
     class Factory(private val application: Application) : ViewModelProvider.Factory {

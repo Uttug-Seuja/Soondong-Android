@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 class MatchingViewModel(private val repository: MatchingRepository) : ViewModel(){
     private val _reservesSportDateText = MutableLiveData<ReservesSportDate>()
 
-
     val reservesSportDateText: MutableLiveData<ReservesSportDate>
         get() = _reservesSportDateText
 
@@ -23,8 +22,6 @@ class MatchingViewModel(private val repository: MatchingRepository) : ViewModel(
         _reservesSportDateText.value = repository.retrofitReservesSportDate(sport, today)
 
     }
-
-
     // factory pattern
     class Factory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

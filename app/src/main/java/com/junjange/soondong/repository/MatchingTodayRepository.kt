@@ -9,7 +9,6 @@ import com.junjange.soondong.network.SoonDongObject
 
 class MatchingTodayRepository(application : Application) {
 
-
     // singleton pattern
     companion object {
         private var instance: MatchingTodayRepository? = null
@@ -23,15 +22,7 @@ class MatchingTodayRepository(application : Application) {
     // Use Retrofit
     suspend fun retrofitReservesSportToday(today: String): ReservesSportDate {
         val response = SoonDongObject.getRetrofitService.getReservesSportToday(today)
-
-        Log.d("tttresponse.body()", response.body().toString())
-        Log.d("tttresponse", response.toString())
-
-
         return if (response.isSuccessful) response.body() as ReservesSportDate else ReservesSportDate(ArrayList())
 
     }
-
-
-
 }

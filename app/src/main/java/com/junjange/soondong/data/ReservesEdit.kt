@@ -9,5 +9,4 @@ data class ReservesEdit(
     val startT: String,
     val reserveDate: String,
     val place: String,
-
 )

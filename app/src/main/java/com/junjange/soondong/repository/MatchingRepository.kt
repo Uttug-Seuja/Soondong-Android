@@ -7,7 +7,6 @@ import com.junjange.soondong.network.SoonDongObject
 
 class MatchingRepository (application : Application) {
 
-
     // singleton pattern
     companion object {
         private var instance: MatchingRepository? = null
@@ -21,15 +20,7 @@ class MatchingRepository (application : Application) {
     // Use Retrofit
     suspend fun retrofitReservesSportDate(sport: String, today: String): ReservesSportDate {
         val response = SoonDongObject.getRetrofitService.getReservesSportDate(sport, today)
-        Log.d("ttt", today.toString())
-
-        Log.d("ttt", "tttt")
-
-
         return if (response.isSuccessful) response.body() as ReservesSportDate else ReservesSportDate(ArrayList())
 
     }
-
-
-
 }

@@ -47,7 +47,6 @@ class MatchingTodayActivity : AppCompatActivity() , MatchTodayAdapter.ItemClickL
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
-
         setMatchView()
         setObserver()
 
@@ -61,51 +60,23 @@ class MatchingTodayActivity : AppCompatActivity() , MatchTodayAdapter.ItemClickL
     }
 
     private fun setObserver() {
-
-//        val matchList = Constants.getMatches()
-//
-//        matchTodayAdapter.setData(matchList)
-
         viewModel.reservesSportTodayRetrofit(sdf.format(cal.time).toString())
-
         viewModel.retrofitReservesSportTodayText.observe(this){
             viewModel.retrofitReservesSportTodayText.value.let {
                 matchTodayAdapter.setData(it!!.reservesSportDateData)
 
-
             }
-
         }
-
-
     }
-
-    /**
-     * 클릭 리스너 설정
-     */
-
-
-    /**
-     * 리사이클러뷰용 어댑터 설정
-     */
-
-
-    /**
-     * 매월 달력을 설정하는 기능
-     */
-
-
 
     override fun onItemClickListener(item: Match, position: Int) {
         TODO("Not yet implemented")
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home->{ // 메뉴 버튼
                 finish()
-//                binding.mainDrawerLayout.openDrawer(GravityCompat.START)    // 네비게이션 드로어 열기
             }
         }
         return super.onOptionsItemSelected(item)

@@ -104,17 +104,10 @@ class MatchingEditActivity : AppCompatActivity(){
         binding.editHistoryEndTime.text = matchingEndTime
         binding.editHistoryContent.setText(content)
 
-
         historyDate = matchingDate
         addTextChangedListener()
         setOnClickListener()
-
-
-
-
     }
-
-
 
     //액션버튼 메뉴 액션바에 집어 넣기
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -130,7 +123,6 @@ class MatchingEditActivity : AppCompatActivity(){
                 finish()
                 return super.onOptionsItemSelected(item)
             }
-
 
             R.id.action_search -> {
                 matchCrateClickListener()
@@ -148,11 +140,8 @@ class MatchingEditActivity : AppCompatActivity(){
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun afterTextChanged(editable: Editable) {
-
                 title = binding.editHistoryTitle.text.toString()
                 MyApplication.prefs.setString("title", title.toString())
-
-
             }
         })
 
@@ -161,11 +150,8 @@ class MatchingEditActivity : AppCompatActivity(){
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun afterTextChanged(editable: Editable) {
-
                 place = binding.editHistoryPlace.text.toString()
                 MyApplication.prefs.setString("place", place.toString())
-
-
             }
         })
 
@@ -173,7 +159,6 @@ class MatchingEditActivity : AppCompatActivity(){
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun afterTextChanged(editable: Editable) {
-
                 recruit = binding.editHistoryRecruit.text.toString()
                 MyApplication.prefs.setString("recruit", recruit.toString())
 
@@ -185,20 +170,11 @@ class MatchingEditActivity : AppCompatActivity(){
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun afterTextChanged(editable: Editable) {
-
                 content = binding.editHistoryContent.text.toString()
                 MyApplication.prefs.setString("content", content.toString())
-
-
             }
         })
-
-
     }
-
-
-
-
     private fun setOnClickListener(){
 
 
@@ -249,16 +225,11 @@ class MatchingEditActivity : AppCompatActivity(){
                     historyTime +=
                         if (minute < 10) " 0${minute}분"
                         else " ${minute}분"
-                    Log.d("ttt", historyTime.toString())
-                    Log.d("ttt", hourOfDay.toString())
-                    Log.d("ttt", minute.toString())
-
                     binding.editHistoryStartTime.text =historyTime.toString()
                     MyApplication.prefs.setString("matchingStartTime", historyTime.toString())
 
                 }, hour, minute, false
             )
-
 
             timePicker.show()
 
@@ -311,10 +282,6 @@ class MatchingEditActivity : AppCompatActivity(){
             timePicker.getButton(Dialog.BUTTON_POSITIVE)
                 .setTextColor(Color.parseColor("#293263"))
         }
-
-
-
-
     }
 
     private fun matchCrateClickListener() {
@@ -334,7 +301,6 @@ class MatchingEditActivity : AppCompatActivity(){
                 matchingEndTime = matchingEndTime!!.replace("시 ", ":").replace("분", ":00")
 
 
-
                 viewModel.reservesCreationRetrofit(ReservesCreation(
                     member!!.toInt(),
                     title.toString(),
@@ -351,17 +317,19 @@ class MatchingEditActivity : AppCompatActivity(){
                 viewModel.reservesCreationRetrofit.observe(this){
                     viewModel.reservesCreationRetrofit.value.let {
                         if (it == true){
+                            MyApplication.prefs.setString("title", "")
+                            MyApplication.prefs.setString("sports", "종목 선택")
+                            MyApplication.prefs.setString("place", "")
+                            MyApplication.prefs.setString("recruit", "")
+                            MyApplication.prefs.setString("gender", "모집 성별")
+                            MyApplication.prefs.setString("matchingDate", "매칭 날짜")
+                            MyApplication.prefs.setString("matchingStartTime", "매칭 시작시간")
+                            MyApplication.prefs.setString("matchingEndTime", "매칭 종료시간")
+                            MyApplication.prefs.setString("content", "")
                             finish()
                         }
                     }
                 }
-
-
-
-
-
-
             }
-
     }
 }

@@ -26,12 +26,10 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     private val sdf = SimpleDateFormat("yyyy년 MMMM", Locale.KOREA)
     private val cal = Calendar.getInstance(Locale.KOREA)
     private val sdfRv = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
-
     private val currentDate = Calendar.getInstance(Locale.KOREA)
     private val dates = ArrayList<Date>()
     private lateinit var calendarAdapter: CalendarAdapter
     private lateinit var matchAdapter: MatchAdapter
-
     private val calendarDateList = ArrayList<CalendarDateModel>()
     private var sportType = "SOCCER"
 
@@ -45,16 +43,12 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
-
-
         sportType = intent.getStringExtra("sportsType").toString()
 
         setUpDateAdapter()
         setUpDateClickListener()
         setUpCalendar(currentDate.get(Calendar.DATE) - 1)
         binding.recyclerView.scrollToPosition(currentDate.get(Calendar.DATE) - 1)
-
-
         setMatchView()
         setObserver()
 
@@ -68,23 +62,12 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     }
 
     private fun setObserver() {
-
-//        val matchList = Constants.getMatches()
-//
-//        matchAdapter.setData(matchList)
-
         viewModel.retrofitReservesInfoRetrofit(sportType, sdfRv.format(cal.time).toString())
-        Log.d("ttt", cal.time.toString())
-
         viewModel.reservesSportDateText.observe(this){
             viewModel.reservesSportDateText.value.let {
                 matchAdapter.setData(it!!.reservesSportDateData)
-
             }
         }
-
-
-
     }
 
     /**
@@ -163,9 +146,6 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
     // 클릭 리스너
     override fun onItemClickListener(item: CalendarDateModel, position: Int) {
         calendarDateList.forEachIndexed { index, calendarModel ->
-
-
-//            calendarModel.isSelected = index == position
             if(index == position){
                 calendarModel.isSelected = true
                 viewModel.retrofitReservesInfoRetrofit(sportType, sdfRv.format(calendarModel.data).toString())
@@ -173,7 +153,6 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
             }else{
                 calendarModel.isSelected = false
             }
-
         }
         calendarAdapter.setData(calendarDateList)
 
@@ -188,7 +167,6 @@ class MatchingActivity : AppCompatActivity(), CalendarAdapter.ItemClickListener,
         when(item.itemId){
             android.R.id.home->{ // 메뉴 버튼
                 finish()
-//                binding.mainDrawerLayout.openDrawer(GravityCompat.START)    // 네비게이션 드로어 열기
             }
         }
         return super.onOptionsItemSelected(item)

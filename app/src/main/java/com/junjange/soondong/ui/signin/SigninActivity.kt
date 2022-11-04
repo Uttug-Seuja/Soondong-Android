@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.junjange.soondong.R
 import com.junjange.soondong.data.Login
@@ -23,18 +24,6 @@ class SigninActivity : AppCompatActivity() {
 
     private var userId : String? = null
     private var userPassword : String? = null
-    private var memberId : String? = null
-    private var userGender : Boolean? = null
-    private var flag : Boolean = false
-    private var googleEmail: String? = null
-
-
-    private var userNameFlag : Boolean = false
-    private var userBirthDayFlag : Boolean = false
-    private var userGenderFlag : Boolean = false
-    private var resultCheckFlag : Boolean = false
-
-    private var totalFlag = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +39,6 @@ class SigninActivity : AppCompatActivity() {
 
 
         }
-
-
-
 
         // 사용자 아이디
         binding.idEditText.addTextChangedListener(object : TextWatcher {
@@ -83,11 +69,6 @@ class SigninActivity : AppCompatActivity() {
 
             userId = binding.idEditText.text.toString()
             userPassword = binding.passwordEditText.text.toString()
-            Log.d("ttt",userNameFlag.toString())
-            Log.d("ttt name",userId.toString())
-
-//            registerLogic()
-//            keyBordHide()
             binding.idEditText.clearFocus()
             binding.passwordEditText.clearFocus()
 
@@ -96,15 +77,16 @@ class SigninActivity : AppCompatActivity() {
             // 로그인 로직
             viewModel.retrofitSignInText.value.let {
                 viewModel.retrofitSignInText.observe(this){
-                    if (it.dataInt != -1){
+                    if (it.dataInt != 0){
                         MyApplication.prefs.setString("memberId", it.dataInt.toString())
                         startActivity( Intent(this@SigninActivity, MainActivity::class.java))
                         finish()
+                    }else{
+                        Toast.makeText(this, "회원아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+
                     }
                 }
             }
-
-
         }
     }
 }
