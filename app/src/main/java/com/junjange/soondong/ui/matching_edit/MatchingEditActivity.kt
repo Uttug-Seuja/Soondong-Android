@@ -203,7 +203,9 @@ class MatchingEditActivity : AppCompatActivity(){
                         if (dayOfMonth < 10) "0$dayOfMonth"
                         else "$dayOfMonth"
 
-                    binding.editHistoryDate.text = historyDate
+                    Log.d("ttt123", historyDate.toString())
+
+                    binding.editHistoryDate.text = historyDate.toString()
                     MyApplication.prefs.setString("matchingDate", historyDate.toString())
 
 
@@ -299,6 +301,7 @@ class MatchingEditActivity : AppCompatActivity(){
                 matchingStartTime = matchingStartTime!!.replace("시 ", ":").replace("분", ":00")
                 matchingEndTime = MyApplication.prefs.getString("matchingEndTime", "")
                 matchingEndTime = matchingEndTime!!.replace("시 ", ":").replace("분", ":00")
+                matchingDate = MyApplication.prefs.getString("matchingDate", "")
 
 
                 viewModel.reservesCreationRetrofit(ReservesCreation(

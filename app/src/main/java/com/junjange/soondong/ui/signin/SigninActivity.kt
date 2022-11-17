@@ -77,6 +77,7 @@ class SigninActivity : AppCompatActivity() {
             // 로그인 로직
             viewModel.retrofitSignInText.value.let {
                 viewModel.retrofitSignInText.observe(this){
+                    Log.d("ttt", it.dataInt.toString())
                     if (it.dataInt != 0){
                         MyApplication.prefs.setString("memberId", it.dataInt.toString())
                         startActivity( Intent(this@SigninActivity, MainActivity::class.java))
